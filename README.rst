@@ -41,7 +41,20 @@ Testing the Built Packages
 To make sure that all packages are built properly and that there are no linking
 errors::
 
-   source externaltools/setup.sh
    ./test
 
 You should see no errors.
+
+
+Using the Packages
+==================
+
+First source the setup script::
+
+   source externaltools/setup.sh
+
+In a Python script::
+
+   from externaltools import MissingETUtility
+
+etc...
