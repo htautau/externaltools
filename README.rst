@@ -42,6 +42,6 @@ To make sure that all packages are built properly and that there are no linking
 errors::
 
    source externaltools/setup.sh
-   ./test_libs.py
+   ./test
 
 You should see no errors.
