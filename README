@@ -11,17 +11,12 @@ Please add any additional packages.
 
 Then to checkout all packages:
 
-./fetch [username]
+./fetch
 
-and to build all packages:
+and to build and install all packages (in ./externaltools/lib):
 
-./waf
-
-to install libraries in ./externaltools/lib
-
-./waf install
+./waf configure build install
 
 to clean:
 
-./build clean
-
+./waf clean
