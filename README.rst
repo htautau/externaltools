@@ -53,6 +53,9 @@ First source the setup script::
 
    source externaltools/setup.sh
 
+This adds externaltools/lib to the LD_LIBRARY_PATH and the parent directory of
+externaltools to the PYTHONPATH.
+
 In a Python script::
 
    from externaltools import MissingETUtility
