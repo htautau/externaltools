@@ -1,0 +1,34 @@
+#!/usr/bin/env python
+
+# author: N037 D4w3
+
+import os
+import sys
+import subprocess
+import shutil
+from toolman import packages
+
+
+if 'CERN_USER' in os.environ:
+    USER = os.environ['CERN_USER']
+else:
+    USER = raw_input('Username: ')
+
+SVNBASE = packages.SVNBASE.format(**locals())
+
+
+for package in packages.read_packages():
+    url = os.path.join(SVNBASE, package.path)
+    outpath = os.path.join(packages.BASE, package.name)
+    # update
+    if os.path.exists(outpath):
+        print "updating %s..." % package.name
+        print "This will remove and recreate %s" % outpath
+        if raw_input("Continue? (Y/[n]) ") == 'Y':
+            shutil.rmtree(outpath)
+        else:
+            continue
+    # checkout
+    print "checking out %s..." % package.name
+    if subprocess.call(['svn', 'co', url, outpath]):
+        print "failed to checkout %s!" % package.name

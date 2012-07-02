@@ -1,0 +1,15 @@
+GoodRunsLists atlasoff/DataQuality/GoodRunsLists/trunk
+CoEPPCore atlasusr/wdavey/CoEPPCore/trunk
+CoEPPD3PDReader atlasusr/wdavey/CoEPPD3PDReader/trunk
+CoEPPTrigTool atlasusr/wdavey/CoEPPTrigTool/trunk
+TauTriggerCorrections atlasusr/wdavey/TauTriggerCorrections/trunk
+PileupReweighting atlasoff/PhysicsAnalysis/AnalysisCommon/PileupReweighting/tags/PileupReweighting-00-02-02
+MissingMassCalculator atlasoff/PhysicsAnalysis/AnalysisCommon/MissingMassCalculator/trunk
+TrigRootAnalysis atlasoff/Trigger/TrigAnalysis/TrigRootAnalysis/trunk
+MissingETUtility atlasoff/Reconstruction/MissingETUtility/trunk
+JetUncertainties atlasoff/Reconstruction/Jet/JetUncertainties/trunk
+JetResolution atlasoff/Reconstruction/Jet/JetResolution/trunk
+MuonMomentumCorrections atlasoff/PhysicsAnalysis/MuonID/MuonIDAnalysis/MuonMomentumCorrections/trunk
+egammaAnalysisUtils atlasoff/Reconstruction/egamma/egammaAnalysis/egammaAnalysisUtils/trunk
+
+TauFakeRates atlasgrp/Physics/Higgs/HSG4/software/hadhad/TauFakeRates/trunk
