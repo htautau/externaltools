@@ -8,7 +8,7 @@ TauTriggerCorrections, etc.)
 The file "packages.txt" contains a list of the packages and the format of each
 line is as follows::
 
-	[package name] [path to package (trunk, or a specific tag or branch) in svn]
+   [package name] [path to package (trunk, or a specific tag or branch) in svn]
 
 Please add any additional packages.
 
@@ -18,15 +18,15 @@ Getting and Building the External Tools
 
 To checkout all packages (you will be prompted for your CERN username)::
 
-	./fetch
+   ./fetch
 
 and to build and install all packages (in ./externaltools/lib)::
 
-	./waf configure build install
+   ./waf configure build install
 
 to clean::
 
-	./waf clean
+   ./waf clean
 
 
 Testing the Built Packages
@@ -35,7 +35,7 @@ Testing the Built Packages
 To make sure that all packages are built properly and that there are no linking
 errors::
 
-	source externaltools/setup.sh
-	./test_libs.py
+   source externaltools/setup.sh
+   ./test_libs.py
 
 You should see no errors.
