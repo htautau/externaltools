@@ -3,7 +3,7 @@
 if [ -d packages/JetUncertainties/ ]
 then
     echo "patching JetUncertainties..."
-    mv packages/JetUncertainties/analysisPlots packages/JetUncertainties/share/
+    cp -r packages/JetUncertainties/analysisPlots packages/JetUncertainties/share/analysisPlots
     cp patches/JetUncertainties/*.config packages/JetUncertainties/share/
 fi
 echo "done"
