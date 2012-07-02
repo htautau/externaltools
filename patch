@@ -14,4 +14,10 @@ then
     echo "patching MissingETUtility..."
     cp patches/MissingETUtility/LinkDef.h packages/MissingETUtility/Root/LinkDef.h
 fi
+if [ -d packages/CoEPPTrigTool ]
+then
+    echo "patching CoEPPTrigTool..."
+    cp patches/CoEPPTrigTool/config_EF_DiTau.xml packages/CoEPPTrigTool/share/config_EF_DiTau.xml
+    cp patches/CoEPPTrigTool/config_EF_DiTau_with_resurrected.xml packages/CoEPPTrigTool/share/config_EF_DiTau_with_resurrected.xml
+fi
 echo "done"
