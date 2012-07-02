@@ -199,7 +199,7 @@ def build_python_package(bld):
         init_file.write(init_template.format(**locals()))
         init_file.close()
         # copy data
-        share_data = join(top, package, 'share')
+        share_data = join(packages.PACKAGE_DIR, package, 'share')
         if os.path.exists(share_data):
             Logs.info("Copying share data for package %s..." % package)
             dest = join(base, 'share')
