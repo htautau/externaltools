@@ -20,11 +20,13 @@ init_template = """
 import os
 import ROOT
 ROOT.gSystem.Load('{LIBRARY}')
-HERE = os.path.dirname(os.path.abspath(__file__))
+RESOURCE_PATH = os.path.join(
+    os.path.dirname(
+        os.path.abspath(__file__)), 'share') + os.path.sep
 
 def get_resource(name=''):
     
-    path = os.path.join(HERE, 'share', name)
+    path = os.path.join(RESOURCE_PATH, name)
     if os.path.exists(path):
         return path
     return None
