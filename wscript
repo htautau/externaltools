@@ -16,6 +16,7 @@ top = '.'
 out = 'build'
 
 init_template = """
+# this is generated code
 import os
 import ROOT
 ROOT.gSystem.Load('{LIBRARY}')
@@ -31,6 +32,7 @@ def get_resource(name=''):
 
 setup_template = """
 #!/bin/bash
+# this is a generated script
 
 # deterine path to this script here so that this
 # package is relocatable
