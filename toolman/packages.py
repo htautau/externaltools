@@ -11,10 +11,8 @@ else:
                 os.path.dirname(
                     os.path.abspath(__file__)), os.path.pardir))
 
-try:
-    BASE = os.path.join(base_prefix, 'packages')
-except KeyError:
-    sys.exit("Please source setup.sh first...")
+PACKAGE_DIR = 'packages'
+BASE = os.path.join(base_prefix, PACKAGE_DIR)
 PACKAGES = os.path.join(base_prefix, 'packages.txt')
 SVNBASE = 'svn+ssh://{USER}@svn.cern.ch/reps/'
 

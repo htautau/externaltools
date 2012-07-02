@@ -12,7 +12,7 @@ from waflib import Build, Utils, TaskGen, Logs
 
 join = os.path.join
 
-top = 'packages'
+top = '.'
 out = 'build'
 
 init_template = """
@@ -55,7 +55,7 @@ def options(opt):
 
 def configure(conf):
     
-    conf.check_tool('compiler_cxx')
+    conf.load('compiler_cxx')
     conf.env['CXXFLAGS'] = rootcore.root_cflags()[:]
     conf.env.append_value('CXXFLAGS', ['-DROOTCORE'])
     conf.env['LINKFLAGS'] = rootcore.root_linkerflags()[:]
@@ -93,7 +93,7 @@ def build(bld):
 
     for name in package_names:
         
-        PATH = join(top, name)
+        PATH = join(packages.PACKAGE_DIR, name)
 
         LIB_DEPENDS = []
         INCLUDES = []
@@ -114,7 +114,7 @@ def build(bld):
                     if DEP not in package_names:
                         sys.exit('Package %s depends on %s but it is not present' %
                                  (name, DEP))
-                    INCLUDES.append(join(top, DEP))
+                    INCLUDES.append(join(packages.PACKAGE_DIR, DEP))
                     LIB_DEPENDS.append(DEP)
                     #LINKFLAGS.append('-l%s' % DEP)
         else:
