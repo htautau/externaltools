@@ -22,11 +22,15 @@ To checkout all packages (you will be prompted for your CERN username)::
 
    ./fetch
 
-and to build and install all packages (in ./externaltools/lib)::
+Apply the patches with::
+
+   ./patch
+
+To build and install all packages (in ./externaltools/lib)::
 
    ./waf configure build install
 
-to clean::
+To clean::
 
    ./waf clean
 
