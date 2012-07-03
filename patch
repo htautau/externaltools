@@ -25,4 +25,12 @@ then
     cp patches/CoEPPTrigTool/EF_tau29_medium1_tau20_medium1_Hypo_00_03_02.xml packages/CoEPPTrigTool/share/triggers/TrigTauHypo_00_03_02/
     cp patches/CoEPPTrigTool/EF_tau29T_medium1_tau20T_medium1_Hypo_00_03_02.xml packages/CoEPPTrigTool/share/triggers/TrigTauHypo_00_03_02/
 fi
+if [ -d packages/ApplyJetCalibration ]
+then
+    echo "patching ApplyJetCalibration..."
+    if [ -d packages/ApplyJetCalibration/data ]
+    then
+        mv packages/ApplyJetCalibration/data packages/ApplyJetCalibration/share
+    fi
+fi
 echo "done"
