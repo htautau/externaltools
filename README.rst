@@ -26,6 +26,7 @@ Apply the patches with::
 
    ./patch
 
+This adds configs to packages and fixes errors not yet fixed by the developers.
 To build and install all packages (in ./externaltools/lib)::
 
    ./waf configure build install
