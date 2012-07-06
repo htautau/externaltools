@@ -1,19 +1,19 @@
 #!/bin/bash
 
-if [ -d packages/JetUncertainties ]
-then
-    echo "patching JetUncertainties..."
-    if [ ! -d packages/JetUncertainties/share/analysisPlots ]
-    then
-        cp -r packages/JetUncertainties/analysisPlots packages/JetUncertainties/share/analysisPlots
-    fi
-    cp patches/JetUncertainties/*.config packages/JetUncertainties/share/
-fi
-if [ -d packages/MissingETUtility ]
-then
-    echo "patching MissingETUtility..."
-    cp patches/MissingETUtility/LinkDef.h packages/MissingETUtility/Root/
-fi
+# if [ -d packages/JetUncertainties ]
+# then
+#     echo "patching JetUncertainties..."
+#     if [ ! -d packages/JetUncertainties/share/analysisPlots ]
+#     then
+#         cp -r packages/JetUncertainties/analysisPlots packages/JetUncertainties/share/analysisPlots
+#     fi
+#     cp patches/JetUncertainties/*.config packages/JetUncertainties/share/
+# fi
+# if [ -d packages/MissingETUtility ]
+# then
+#     echo "patching MissingETUtility..."
+#     cp patches/MissingETUtility/LinkDef.h packages/MissingETUtility/Root/
+# fi
 if [ -d packages/CoEPPTrigTool ]
 then
     echo "patching CoEPPTrigTool..."
@@ -25,12 +25,18 @@ then
     cp patches/CoEPPTrigTool/EF_tau29_medium1_tau20_medium1_Hypo_00_03_02.xml packages/CoEPPTrigTool/share/triggers/TrigTauHypo_00_03_02/
     cp patches/CoEPPTrigTool/EF_tau29T_medium1_tau20T_medium1_Hypo_00_03_02.xml packages/CoEPPTrigTool/share/triggers/TrigTauHypo_00_03_02/
 fi
-if [ -d packages/ApplyJetCalibration ]
+if [ -d packages/ggFReweighting ]
 then
-    echo "patching ApplyJetCalibration..."
-    if [ -d packages/ApplyJetCalibration/data ]
-    then
-        mv packages/ApplyJetCalibration/data packages/ApplyJetCalibration/share
-    fi
+    echo "patching ggFReweighting..."
+    cp patches/ggFReweighting/MakeFile packages/ggFReweighting/.
+    cp patches/ggFReweighting/LinkDef.h packages/ggFReweighting/.
 fi
 echo "done"
+# if [ -d packages/ApplyJetCalibration ]
+# then
+#     echo "patching ApplyJetCalibration..."
+#     if [ -d packages/ApplyJetCalibration/data ]
+#     then
+#         mv packages/ApplyJetCalibration/data packages/ApplyJetCalibration/share
+#     fi
+# fi

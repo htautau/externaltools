@@ -16,9 +16,11 @@ ApplyJetResolutionSmearing atlasperf/CombPerf/JetETMiss/JetCalibrationTools/Appl
 
 MuonMomentumCorrections atlasoff/PhysicsAnalysis/MuonID/MuonIDAnalysis/MuonMomentumCorrections/tags/MuonMomentumCorrections-00-05-03
 MuonEfficiencyCorrections atlasoff/PhysicsAnalysis/MuonID/MuonIDAnalysis/MuonEfficiencyCorrections/tags/MuonEfficiencyCorrections-01-01-03
-TrigMuonEfficiency atlasoff/Trigger/TrigAnalysis/TrigMuonEfficiency/TrigMuonEfficiency-00-01-17
+TrigMuonEfficiency atlasoff/Trigger/TrigAnalysis/TrigMuonEfficiency/tags/TrigMuonEfficiency-00-01-17
 
 egammaAnalysisUtils atlasoff/Reconstruction/egamma/egammaAnalysis/egammaAnalysisUtils/tags/egammaAnalysisUtils-00-02-96
 
 TauFakeRates atlasgrp/Physics/Higgs/HSG4/software/hadhad/TauFakeRates/trunk
 MissingMassCalculator atlasoff/PhysicsAnalysis/AnalysisCommon/MissingMassCalculator/trunk
+
+ggFReweighting atlasoff/PhysicsAnalysis/HiggsPhys/ggFReweighting/tags/ggFReweighting-00-00-06
