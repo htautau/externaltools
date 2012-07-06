@@ -9,11 +9,11 @@
 #     fi
 #     cp patches/JetUncertainties/*.config packages/JetUncertainties/share/
 # fi
-# if [ -d packages/MissingETUtility ]
-# then
-#     echo "patching MissingETUtility..."
-#     cp patches/MissingETUtility/LinkDef.h packages/MissingETUtility/Root/
-# fi
+if [ -d packages/MissingETUtility ]
+then
+    echo "patching MissingETUtility..."
+    cp patches/MissingETUtility/LinkDef.h packages/MissingETUtility/Root/
+fi
 if [ -d packages/CoEPPTrigTool ]
 then
     echo "patching CoEPPTrigTool..."
@@ -28,8 +28,10 @@ fi
 if [ -d packages/ggFReweighting ]
 then
     echo "patching ggFReweighting..."
-    cp patches/ggFReweighting/MakeFile packages/ggFReweighting/.
+    cp patches/ggFReweighting/Makefile packages/ggFReweighting/.
     cp patches/ggFReweighting/LinkDef.h packages/ggFReweighting/.
+    mkdir packages/ggFReweighting/share
+    mv packages/ggFReweighting/*root share/.
 fi
 echo "done"
 # if [ -d packages/ApplyJetCalibration ]

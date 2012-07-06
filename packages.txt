@@ -21,6 +21,6 @@ TrigMuonEfficiency atlasoff/Trigger/TrigAnalysis/TrigMuonEfficiency/tags/TrigMuo
 egammaAnalysisUtils atlasoff/Reconstruction/egamma/egammaAnalysis/egammaAnalysisUtils/tags/egammaAnalysisUtils-00-02-96
 
 TauFakeRates atlasgrp/Physics/Higgs/HSG4/software/hadhad/TauFakeRates/trunk
-MissingMassCalculator atlasoff/PhysicsAnalysis/AnalysisCommon/MissingMassCalculator/trunk
+MissingMassCalculator atlasoff/PhysicsAnalysis/AnalysisCommon/MissingMassCalculator/tags/MissingMassCalculator-00-00-08
 
 ggFReweighting atlasoff/PhysicsAnalysis/HiggsPhys/ggFReweighting/tags/ggFReweighting-00-00-06
