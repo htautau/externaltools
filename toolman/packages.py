@@ -50,9 +50,9 @@ class Package(object):
         self.path = path
 
 
-def read_packages():
+def read_packages(filename=PACKAGES):
 
-    for package in read_file(PACKAGES):
+    for package in read_file(filename):
         match = re.match(PACKAGE_PATTERN, package)
         if not match:
             print "Not a valid package name: %s" % name

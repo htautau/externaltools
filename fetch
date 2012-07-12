@@ -24,7 +24,7 @@ USER = args.user
 SVNBASE = packages.SVNBASE.format(**locals())
 
 
-for package in packages.read_packages():
+for package in packages.read_packages(args.packages_file):
     url = os.path.join(SVNBASE, package.path)
     outpath = os.path.join(packages.BASE, package.name)
     # update

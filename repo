@@ -1,0 +1,51 @@
+#!/usr/bin/env python
+
+from toolman import packages
+from subprocess import call
+import os
+
+
+def show_repo():
+
+    for name, path in packages.REPO.items():
+        print "%s => %s" % (name, path)
+
+
+def show_used(packages_file):
+
+    for package in packages.read_packages(packages_file):
+        print "%s => %s" % (package.name, package.path)
+
+
+def show_tags(user, package):
+    
+    if package not in packages.REPO:
+        sys.exit('Repository does not contain the package %s' % package)
+    USER=user
+    url = os.path.join(packages.SVNBASE.format(**locals()),
+                       packages.REPO[package], 'tags')
+    call('svn list %s' % url, shell=True)
+
+
+from argparse import ArgumentParser
+
+parser = ArgumentParser()
+subparsers = parser.add_subparsers()
+
+parser_show = subparsers.add_parser('show')
+parser_show.set_defaults(op=show_repo)
+
+parser_used = subparsers.add_parser('used')
+parser_used.add_argument('packages_file',
+        nargs='?', default='packages.txt')
+parser_used.set_defaults(op=show_used)
+
+parser_tags = subparsers.add_parser('tags')
+parser_tags.add_argument('-u', '--user', required=True)
+parser_tags.add_argument('package')
+parser_tags.set_defaults(op=show_tags)
+
+args = parser.parse_args()
+cmd_args = dict(args._get_kwargs())
+del cmd_args['op']
+args.op(**cmd_args)
