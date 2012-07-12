@@ -1,15 +1,13 @@
 PileupReweighting-00-02-02
 ApplyJetCalibration-00-01-07
 
-ZZ:
 ApplyJetCalibration-00-01-07
 JetUncertainties-00-06-00-01
 PileupReweighting-00-00-01
 JetResolution-01-00-01
 MissingETUtility-01-00-06
 MissingMassCalculator-00-00-02
-CoEPPCore latest (no tag)
-CoEPPTrigTool latest (no tag)
+CoEPPCore
+CoEPPTrigTool
 GoodRunsLists-00-00-97
 TauTriggerCorrections-00-00-02
-
