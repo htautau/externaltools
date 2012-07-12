@@ -1,23 +1,45 @@
 import os
 import sys
+import re
 
-base_flag = 'TOOLMAN_BASE'
-if base_flag in os.environ:
-    base_prefix = os.environ[base_flag]
+
+PACKAGE_PATTERN = re.compile('(?P<name>\w+)(?P<tag>(?:-\d{2}){3})?')
+
+
+BASE_FLAG = 'TOOLMAN_BASE'
+if BASE_FLAG in os.environ:
+    BASE_PREFIX = os.environ[BASE_FLAG]
 else:
     # use parent directory
-    base_prefix = os.path.abspath(
+    BASE_PREFIX = os.path.abspath(
             os.path.join(
                 os.path.dirname(
                     os.path.abspath(__file__)), os.path.pardir))
 
 PACKAGE_DIR = 'packages'
-BASE = os.path.join(base_prefix, PACKAGE_DIR)
-PACKAGES = os.path.join(base_prefix, 'packages.txt')
+BASE = os.path.join(BASE_PREFIX, PACKAGE_DIR)
+REPOS = os.path.join(BASE_PREFIX, 'repo.txt')
+PACKAGES = os.path.join(BASE_PREFIX, 'packages.txt')
 SVNBASE = 'svn+ssh://{USER}@svn.cern.ch/reps/'
 
 if not os.path.exists(BASE):
     os.mkdir(BASE)
+
+
+def read_file(name):
+
+    for i, line in enumerate(open(name).readlines()):
+        line = line.strip()
+        if not line or line.startswith('#'):
+            continue
+        try:
+            yield line
+        except:
+            print "line %i not understood: %s" % (i + 1, line)
+
+REPO = {}
+for line in read_file(REPOS):
+    REPO[os.path.basename(line)] = line
 
 
 class Package(object):
@@ -30,14 +52,21 @@ class Package(object):
 
 def read_packages():
 
-    for i, line in enumerate(open(PACKAGES).readlines()):
-        line = line.strip()
-        if not line or line.startswith('#'):
+    for package in read_file(PACKAGES):
+        match = re.match(PACKAGE_PATTERN, package)
+        if not match:
+            print "Not a valid package name: %s" % name
             continue
-        try:
-            yield Package(*line.split())
-        except TypeError:
-            print "line %i not understood: %s" % (i + 1, line)
+        name = match.group('name')
+        if name not in REPO:
+            print "Package %s not in repo.txt: %s" % name
+            continue
+        base_path = REPO[name]
+        if match.group('tag'):
+            path = os.path.join(base_path, 'tags', package)
+        else: # assume trunk
+            path = os.path.join(base_path, 'trunk')
+        yield Package(name=name, path=path)
 
 
 def list_packages():

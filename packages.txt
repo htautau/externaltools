@@ -1,26 +1,29 @@
-GoodRunsLists atlasoff/DataQuality/GoodRunsLists/trunk
-PileupReweighting atlasoff/PhysicsAnalysis/AnalysisCommon/PileupReweighting/trunk
+# first add path to package in repo.txt
+# package name with no tag assumes trunk
+# blank lines and lines beginning with # are ignored
 
-CoEPPCore atlasusr/wdavey/CoEPPCore/trunk
-CoEPPD3PDReader atlasusr/wdavey/CoEPPD3PDReader/trunk
-CoEPPTrigTool atlasusr/wdavey/CoEPPTrigTool/trunk
-TauTriggerCorrections atlasusr/wdavey/TauTriggerCorrections/trunk
-TrigRootAnalysis atlasoff/Trigger/TrigAnalysis/TrigRootAnalysis/trunk
+GoodRunsLists
+PileupReweighting
 
-MissingETUtility atlasoff/Reconstruction/MissingETUtility/tags/MissingETUtility-01-00-05
+CoEPPCore
+CoEPPD3PDReader
+CoEPPTrigTool
+TauTriggerCorrections
+TrigRootAnalysis
 
-JetUncertainties atlasoff/Reconstruction/Jet/JetUncertainties/tags/JetUncertainties-00-05-10
-JetResolution atlasoff/Reconstruction/Jet/JetResolution/tags/JetResolution-01-00-00
-ApplyJetCalibration atlasoff/Reconstruction/Jet/ApplyJetCalibration/tags/ApplyJetCalibration-00-01-06
-ApplyJetResolutionSmearing atlasperf/CombPerf/JetETMiss/JetCalibrationTools/ApplyJetResolutionSmearing/tags/ApplyJetResolutionSmearing-00-00-03
+MissingETUtility-01-00-05
+JetUncertainties-00-05-10
+JetResolution-01-00-00
+ApplyJetCalibration-00-01-06
+ApplyJetResolutionSmearing-00-00-03
 
-MuonMomentumCorrections atlasoff/PhysicsAnalysis/MuonID/MuonIDAnalysis/MuonMomentumCorrections/tags/MuonMomentumCorrections-00-05-03
-MuonEfficiencyCorrections atlasoff/PhysicsAnalysis/MuonID/MuonIDAnalysis/MuonEfficiencyCorrections/tags/MuonEfficiencyCorrections-01-01-03
-TrigMuonEfficiency atlasoff/Trigger/TrigAnalysis/TrigMuonEfficiency/tags/TrigMuonEfficiency-00-01-17
+MuonMomentumCorrections-00-05-03
+MuonEfficiencyCorrections-01-01-03
+TrigMuonEfficiency-00-01-17
 
-egammaAnalysisUtils atlasoff/Reconstruction/egamma/egammaAnalysis/egammaAnalysisUtils/tags/egammaAnalysisUtils-00-02-96
+egammaAnalysisUtils-00-02-96
 
-TauFakeRates atlasgrp/Physics/Higgs/HSG4/software/hadhad/TauFakeRates/trunk
-MissingMassCalculator atlasoff/PhysicsAnalysis/AnalysisCommon/MissingMassCalculator/tags/MissingMassCalculator-00-00-08
+TauFakeRates
+MissingMassCalculator-00-00-08
 
-ggFReweighting atlasoff/PhysicsAnalysis/HiggsPhys/ggFReweighting/tags/ggFReweighting-00-00-06
+ggFReweighting-00-00-06
