@@ -29,6 +29,6 @@ for package in packages.read_packages():
         else:
             continue
     # checkout
-    print "checking out %s..." % package.name
+    print "checking out %s (%s)..." % (package.name, package.path)
     if subprocess.call(['svn', 'co', url, outpath]):
         print "failed to checkout %s!" % package.name

@@ -30,15 +30,18 @@ then
     echo "patching ggFReweighting..."
     cp patches/ggFReweighting/Makefile packages/ggFReweighting/.
     cp patches/ggFReweighting/LinkDef.h packages/ggFReweighting/.
-    mkdir packages/ggFReweighting/share
-    mv packages/ggFReweighting/*root share/.
+    if [ ! -d packages/ggFReweighting/share ]
+    then
+        mkdir packages/ggFReweighting/share
+        mv packages/ggFReweighting/*root packages/ggFReweighting/share
+    fi
+fi
+if [ -d packages/ApplyJetCalibration ]
+then
+    echo "patching ApplyJetCalibration..."
+    if [ -d packages/ApplyJetCalibration/data ]
+    then
+        mv packages/ApplyJetCalibration/data packages/ApplyJetCalibration/share
+    fi
 fi
 echo "done"
-# if [ -d packages/ApplyJetCalibration ]
-# then
-#     echo "patching ApplyJetCalibration..."
-#     if [ -d packages/ApplyJetCalibration/data ]
-#     then
-#         mv packages/ApplyJetCalibration/data packages/ApplyJetCalibration/share
-#     fi
-# fi
