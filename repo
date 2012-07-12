@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from toolman import packages
-from subprocess import call
+import subprocess
 import os
 
 
@@ -19,12 +19,8 @@ def show_used(packages_file):
 
 def show_tags(user, package):
     
-    if package not in packages.REPO:
-        sys.exit('Repository does not contain the package %s' % package)
-    USER=user
-    url = os.path.join(packages.SVNBASE.format(**locals()),
-                       packages.REPO[package], 'tags')
-    call('svn list %s' % url, shell=True)
+    for tag in packages.list_tags(user, package):
+        print tag
 
 
 from argparse import ArgumentParser
