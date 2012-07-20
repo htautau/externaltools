@@ -21,7 +21,7 @@ MuonMomentumCorrections-00-05-03
 MuonEfficiencyCorrections-01-01-03
 TrigMuonEfficiency-00-01-17
 
-egammaAnalysisUtils-00-02-96
+egammaAnalysisUtils-00-03-30
 
 TauFakeRates
 MissingMassCalculator-00-00-08
