@@ -35,8 +35,12 @@ def show_updates(user, packages_file):
                 continue
             newer_packages = tags[tags.index(package) + 1:]
             if newer_packages:
-                print "Newer versions of package %s are available:" % (
-                    package.name)
+                if len(newer_packages) == 1:
+                    print "A newer tag of package %s is available:" % (
+                        package.name)
+                else:
+                    print "Newer tags of package %s are available:" % (
+                        package.name)
                 for p in newer_packages:
                     print p
                 print "You are using %s" % package
