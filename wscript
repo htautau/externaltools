@@ -16,7 +16,7 @@ top = '.'
 out = 'build'
 
 init_template = """
-class ResourceNotFound(exception):
+class ResourceNotFound(Exception):
     pass
 """
 
