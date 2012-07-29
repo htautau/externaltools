@@ -16,20 +16,30 @@ top = '.'
 out = 'build'
 
 init_template = """
+class ResourceNotFound(exception):
+    pass
+"""
+
+package_init_template = """
 # this is generated code
 import os
+from .. import ResourceNotFound
 import ROOT
+
+
 ROOT.gSystem.Load('{LIBRARY}')
 RESOURCE_PATH = os.path.join(
     os.path.dirname(
         os.path.abspath(__file__)), 'share') + os.path.sep
+
 
 def get_resource(name=''):
     
     path = os.path.join(RESOURCE_PATH, name)
     if os.path.exists(path):
         return path
-    return None
+    raise ResourceNotFound('resource %s not found in package %s' %
+        (name, __name__))
 """
 
 setup_template = """
@@ -186,7 +196,9 @@ def ignore_paths(dir, contents):
 def build_python_package(bld):
 
     # create __init__.py
-    open(join(bld.options.prefix, '__init__.py'), 'w').close()
+    init_file = open(join(bld.options.prefix, '__init__.py'), 'w')
+    init_file.write(init_template)
+    init_file.close()
     # create setup.sh
     setup_file = open(join(bld.options.prefix, 'setup.sh'), 'w')
     setup_file.write(setup_template)
@@ -196,10 +208,10 @@ def build_python_package(bld):
         base = join(bld.options.prefix, package)
         if not os.path.exists(base):
             os.mkdir(base)
-        # create __init__.py
-        init_file = open(join(base, '__init__.py'), 'w')
-        init_file.write(init_template.format(**locals()))
-        init_file.close()
+        # create package-level __init__.py
+        package_init_file = open(join(base, '__init__.py'), 'w')
+        package_init_file.write(package_init_template.format(**locals()))
+        package_init_file.close()
         # copy data
         share_data = join(packages.PACKAGE_DIR, package, 'share')
         if os.path.exists(share_data):
