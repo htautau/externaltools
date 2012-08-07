@@ -14,6 +14,7 @@ atlasoff/PhysicsAnalysis/MuonID/MuonIDAnalysis/MuonMomentumCorrections
 atlasoff/PhysicsAnalysis/MuonID/MuonIDAnalysis/MuonEfficiencyCorrections
 atlasoff/Trigger/TrigAnalysis/TrigMuonEfficiency
 atlasoff/Reconstruction/egamma/egammaAnalysis/egammaAnalysisUtils
-atlasgrp/Physics/Higgs/HSG4/software/hadhad/TauFakeRates
+atlasphys/Physics/Higgs/HSG4/software/hadhad/TauFakeRates
+#atlasphys/Physics/Higgs/HSG4/software/hadhad/TauFakeRates2012
 atlasoff/PhysicsAnalysis/AnalysisCommon/MissingMassCalculator
 atlasoff/PhysicsAnalysis/HiggsPhys/ggFReweighting

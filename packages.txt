@@ -24,6 +24,7 @@ TrigMuonEfficiency-00-01-17
 egammaAnalysisUtils-00-03-30
 
 TauFakeRates
+#TauFakeRates2012
 MissingMassCalculator-00-00-08
 
 ggFReweighting-00-00-06
