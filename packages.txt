@@ -21,6 +21,7 @@ MuonMomentumCorrections-00-05-03
 MuonEfficiencyCorrections-01-01-03
 TrigMuonEfficiency-00-01-17
 
+egammaEvent
 egammaAnalysisUtils-00-03-30
 
 TauFakeRates
