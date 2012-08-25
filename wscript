@@ -89,8 +89,8 @@ def build(bld):
         bld.add_post_fun(build_python_package)
 
     install_lib_path = join(bld.options.prefix, 'lib')
-    bld.post_mode = Build.POST_AT_ONCE
-    #bld.post_mode = Build.POST_LAZY
+    #bld.post_mode = Build.POST_AT_ONCE
+    bld.post_mode = Build.POST_LAZY
     #bld.post_mode = Build.POST_BOTH
 
     bld.add_group('dicts')
@@ -212,14 +212,25 @@ def build_python_package(bld):
         package_init_file = open(join(base, '__init__.py'), 'w')
         package_init_file.write(package_init_template.format(**locals()))
         package_init_file.close()
+        
         # copy data
+        # check for either data/ or share/
         share_data = join(packages.PACKAGE_DIR, package, 'share')
-        if os.path.exists(share_data):
-            Logs.info("Copying share data for package %s..." % package)
+        data_data = join(packages.PACKAGE_DIR, package, 'data')
+        data = None
+        if os.path.exists(share_data) and os.path.exists(data_data):
+            Logs.error("Both share/ and data/ exist for package %s!" % package)
+        elif os.path.exists(share_data):
+            data = share_data
+        elif os.path.exists(data_data):
+            data = data_data
+
+        if data is not None:
+            Logs.info("Copying data for package %s..." % package)
             dest = join(base, 'share')
             if os.path.exists(dest):
                 shutil.rmtree(dest)
-            shutil.copytree(share_data, dest, ignore=ignore_paths)
+            shutil.copytree(data, dest, ignore=ignore_paths)
 
 
 # support for the "dynamic_source" attribute follows
