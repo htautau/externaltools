@@ -8,7 +8,8 @@ PileupReweighting
 CoEPPCore
 CoEPPD3PDReader
 CoEPPTrigTool
-TauTriggerCorrections
+# last 2011 tag
+TauTriggerCorrections-00-00-02
 TrigRootAnalysis
 
 MissingETUtility-01-00-05

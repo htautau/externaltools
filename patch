@@ -44,4 +44,12 @@ then
         mv packages/ApplyJetCalibration/data packages/ApplyJetCalibration/share
     fi
 fi
+if [ -d packages/TauTriggerCorrections ]
+then
+    echo "patching TauTriggerCorrections..."
+    if [ -d packages/TauTriggerCorrections/root ]
+    then
+        mv packages/TauTriggerCorrections/root packages/TauTriggerCorrections/share
+    fi
+fi
 echo "done"
