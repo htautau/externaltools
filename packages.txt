@@ -4,13 +4,17 @@
 
 GoodRunsLists
 PileupReweighting
+TrigRootAnalysis
 
 CoEPPCore
 CoEPPD3PDReader
 CoEPPTrigTool
 # last 2011 tag
 TauTriggerCorrections-00-00-02
-TrigRootAnalysis
+TauFakeRates
+#TauFakeRates2012
+MissingMassCalculator-00-00-08
+TauDiscriminant
 
 MissingETUtility-01-00-09
 JetUncertainties-00-05-10
@@ -24,9 +28,5 @@ TrigMuonEfficiency-00-01-17
 
 egammaEvent
 egammaAnalysisUtils-00-03-30
-
-TauFakeRates
-#TauFakeRates2012
-MissingMassCalculator-00-00-08
 
 ggFReweighting-00-00-10

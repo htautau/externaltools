@@ -9,11 +9,6 @@ then
     fi
     cp patches/JetUncertainties/*.config packages/JetUncertainties/share/
 fi
-if [ -d packages/MissingETUtility ]
-then
-    echo "patching MissingETUtility..."
-    cp patches/MissingETUtility/LinkDef.h packages/MissingETUtility/Root/
-fi
 if [ -d packages/CoEPPTrigTool ]
 then
     echo "patching CoEPPTrigTool..."
@@ -24,17 +19,6 @@ then
     cp patches/CoEPPTrigTool/EF_tau29_medium1_tau20_medium1_Hypo_00_02_42.xml packages/CoEPPTrigTool/share/triggers/TrigTauHypo_00_02_42/
     cp patches/CoEPPTrigTool/EF_tau29_medium1_tau20_medium1_Hypo_00_03_02.xml packages/CoEPPTrigTool/share/triggers/TrigTauHypo_00_03_02/
     cp patches/CoEPPTrigTool/EF_tau29T_medium1_tau20T_medium1_Hypo_00_03_02.xml packages/CoEPPTrigTool/share/triggers/TrigTauHypo_00_03_02/
-fi
-if [ -d packages/ggFReweighting ]
-then
-    echo "patching ggFReweighting..."
-    cp patches/ggFReweighting/Makefile packages/ggFReweighting/.
-    cp patches/ggFReweighting/LinkDef.h packages/ggFReweighting/.
-    if [ ! -d packages/ggFReweighting/share ]
-    then
-        mkdir packages/ggFReweighting/share
-        mv packages/ggFReweighting/*root packages/ggFReweighting/share
-    fi
 fi
 if [ -d packages/ApplyJetCalibration ]
 then
