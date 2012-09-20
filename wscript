@@ -43,20 +43,27 @@ def get_resource(name=''):
 """
 
 setup_template = """
-#!/bin/bash
+# This script will work in either bash or zsh.
+
+# deterine path to this script
+# http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
+EXTERNALTOOLS_SETUP="${BASH_SOURCE[0]:-$0}"
+
+EXTERNALTOOLS_DIR="$( dirname "$EXTERNALTOOLS_SETUP" )"
+while [ -h "$EXTERNALTOOLS_SETUP" ]
+do 
+  EXTERNALTOOLS_SETUP="$(readlink "$EXTERNALTOOLS_SETUP")"
+  [[ $EXTERNALTOOLS_SETUP != /* ]] && EXTERNALTOOLS_SETUP="$EXTERNALTOOLS_DIR/$EXTERNALTOOLS_SETUP"
+  EXTERNALTOOLS_SETUP="$( cd -P "$( dirname "$EXTERNALTOOLS_SETUP"  )" && pwd )"
+done
+EXTERNALTOOLS_DIR="$( cd -P "$( dirname "$EXTERNALTOOLS_SETUP" )" && pwd )"
+
 # this is a generated script
 
-# deterine path to this script here so that this
-# package is relocatable
-# http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
-EXTERNALTOOLS_SOURCE="${BASH_SOURCE[0]}"
-while [ -h "$EXTERNALTOOLS_SOURCE" ] ; do EXTERNALTOOLS_SOURCE="$(readlink "$EXTERNALTOOLS_SOURCE")"; done
-EXTERNALTOOLS="$( cd -P "$( dirname "$EXTERNALTOOLS_SOURCE" )" && pwd )"
-EXTERNALTOOLS_DIR="$(dirname "$EXTERNALTOOLS")"
-echo "sourcing ${EXTERNALTOOLS_SOURCE}..."
+echo "sourcing ${EXTERNALTOOLS_SETUP}..."
 
 export PYTHONPATH=${EXTERNALTOOLS_DIR}${PYTHONPATH:+:$PYTHONPATH}
-export LD_LIBRARY_PATH=${EXTERNALTOOLS}/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+export LD_LIBRARY_PATH=${EXTERNALTOOLS_DIR}/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
 """
 
 os.environ['PREFIX'] = join(os.path.abspath(os.curdir), 'externaltools')
