@@ -18,9 +18,9 @@ Please add any additional packages.
 Getting and Building the External Tools
 =======================================
 
-To checkout all packages (you will be prompted for your CERN username)::
+To checkout all packages (supply your CERN username)::
 
-   ./fetch
+   ./fetch -u username
 
 Apply the patches with::
 
