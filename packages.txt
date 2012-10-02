@@ -17,6 +17,7 @@ MissingMassCalculator-00-00-09
 TauDiscriminant
 
 MissingETUtility-01-01-02
+# https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/JetUncertainties
 JetUncertainties-00-07-01
 JetResolution-01-00-01
 ApplyJetCalibration-00-02-07

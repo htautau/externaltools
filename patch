@@ -1,14 +1,14 @@
 #!/bin/bash
 
-if [ -d packages/JetUncertainties ]
-then
-    echo "patching JetUncertainties..."
-    if [ ! -d packages/JetUncertainties/share/analysisPlots ]
-    then
-        cp -r packages/JetUncertainties/analysisPlots packages/JetUncertainties/share/analysisPlots
-    fi
-    cp patches/JetUncertainties/*.config packages/JetUncertainties/share/
-fi
+#if [ -d packages/JetUncertainties ]
+#then
+#    echo "patching JetUncertainties..."
+#    if [ ! -d packages/JetUncertainties/share/analysisPlots ]
+#    then
+#        cp -r packages/JetUncertainties/analysisPlots packages/JetUncertainties/share/analysisPlots
+#    fi
+#    cp patches/JetUncertainties/*.config packages/JetUncertainties/share/
+#fi
 if [ -d packages/CoEPPTrigTool ]
 then
     echo "patching CoEPPTrigTool..."
@@ -19,14 +19,6 @@ then
     cp patches/CoEPPTrigTool/EF_tau29_medium1_tau20_medium1_Hypo_00_02_42.xml packages/CoEPPTrigTool/share/triggers/TrigTauHypo_00_02_42/
     cp patches/CoEPPTrigTool/EF_tau29_medium1_tau20_medium1_Hypo_00_03_02.xml packages/CoEPPTrigTool/share/triggers/TrigTauHypo_00_03_02/
     cp patches/CoEPPTrigTool/EF_tau29T_medium1_tau20T_medium1_Hypo_00_03_02.xml packages/CoEPPTrigTool/share/triggers/TrigTauHypo_00_03_02/
-fi
-if [ -d packages/ApplyJetCalibration ]
-then
-    echo "patching ApplyJetCalibration..."
-    if [ -d packages/ApplyJetCalibration/data ]
-    then
-        mv packages/ApplyJetCalibration/data packages/ApplyJetCalibration/share
-    fi
 fi
 if [ -d packages/TauTriggerCorrections ]
 then
