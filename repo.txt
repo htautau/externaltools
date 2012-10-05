@@ -20,3 +20,4 @@ atlasphys/Physics/Higgs/HSG4/software/hadhad/TauFakeRates
 #atlasphys/Physics/Higgs/HSG4/software/hadhad/TauFakeRates2012
 atlasoff/PhysicsAnalysis/AnalysisCommon/MissingMassCalculator
 atlasoff/PhysicsAnalysis/HiggsPhys/ggFReweighting
+atlasusr/mbecking/HSG4TriggerSF

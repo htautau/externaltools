@@ -31,3 +31,5 @@ egammaEvent
 egammaAnalysisUtils-00-03-30
 
 ggFReweighting-00-00-10
+
+HSG4TriggerSF-00-00-02
