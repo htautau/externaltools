@@ -1,6 +1,6 @@
 src
 build
-externaltools
+externaltools*
 *.pyc
 *Dict*
 *.so
