@@ -5,7 +5,7 @@ PREFIX ?= externaltools
 all: config build install
 
 clean-pyc:
-	find $(PREFIX) -name "*.pyc" | xargs rm -f
+	test -d $(PREFIX) || find $(PREFIX) -name "*.pyc" | xargs rm -f
 
 clean:
 	./waf distclean
