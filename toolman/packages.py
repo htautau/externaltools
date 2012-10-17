@@ -218,5 +218,5 @@ def fetch(bundle, user):
 
 def bundle_to_name(bundle):
 
-    # Replace invalid characters with '_'
-    return 'bundle_%s' % re.sub('[^0-9a-zA-Z_]', '_', bundle)
+    # Replace invalid characters with '_' and convert to lower case
+    return 'bundle_%s' % re.sub('[^0-9a-zA-Z_]', '_', bundle).lower()

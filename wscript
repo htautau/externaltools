@@ -33,7 +33,7 @@ def register_loaded(bundle, library):
         if other_bundle == bundle:
             continue
         if library in libs:
-            raise ValueError(
+            raise RuntimeError(
                 'Attempted to load the same library (%s) from two bundles' %
                 library)
     if library not in LOADED_LIBRARIES[bundle]:
