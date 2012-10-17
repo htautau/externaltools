@@ -58,7 +58,7 @@ def load_library(name):
     deps_file = open(os.path.join(HERE, name, 'deps'), 'r')
     for dep in deps_file.readlines():
         load_library(dep.strip())
-    lib_path = os.path.join(HERE, name, 'lib%s.so' % name)
+    lib_path = os.path.join(HERE, 'lib', 'lib%s.so' % name)
     # ignore packages that didn't produce a library (headers only)
     if os.path.isfile(lib_path):
         if not register_loaded(NAME, name):
@@ -241,8 +241,8 @@ def build(bld):
                     dynamic_source=DICT_SRC,
                     target=name,
                     #use=LIB_DEPENDS,
-                    install_path='${PREFIX}/%s/%s' % (
-                        packages.bundle_to_name(bundle), name))
+                    install_path='${PREFIX}/%s/lib' %
+                        packages.bundle_to_name(bundle))
             
             if make is not None:
                 rootcore.define_env(shlib.env, make)
