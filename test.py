@@ -1,20 +1,16 @@
 #!/usr/bin/env python
-import sys
-import ROOT
-ROOT.PyConfig.IgnoreCommandLineOptions = True
-import os
-from glob import glob
+from toolman import packages
 
-HERE = os.path.dirname(os.path.abspath(__file__))
 
-if len(sys.argv) == 1:
-    libs = glob(os.path.join(HERE, 'externaltools', 'lib', '*.so'))
-else:
-    libs = sys.argv[1:]
+for bundle in packages.list_bundles():
 
-for lib in libs:
-    print "Loading %s..." % lib
-    try:
-        ROOT.gSystem.Load(lib)
-    except Exception, e:
-        print e
+    if not packages.bundle_fetched(bundle):
+        continue
+
+    print "Testing bundle %s ..." % bundle
+
+    for package in packages.list_packages(bundle):
+
+        print "Testing package %s ..." % package
+        exec('from externaltools.%s import %s' % (
+            packages.bundle_to_name(bundle), package))
