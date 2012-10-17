@@ -123,9 +123,9 @@ def find_linkdef(base='.'):
     return None
 
 
-def is_rootcore(name):
+def is_rootcore(bundle, name):
 
-    path = os.path.join(packages.BASE, name)
+    path = os.path.join(packages.PACKAGE_PATH, bundle, name)
     return (os.path.isdir(os.path.join(path, 'Root')) and
             os.path.isdir(os.path.join(path, name)) and
             os.path.isfile(os.path.join(path, 'cmt', MAKEFILE)))

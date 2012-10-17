@@ -1,7 +1,7 @@
-packages
-*.pyc
+src
+build
 externaltools
+*.pyc
 *Dict*
 *.so
 .*
-build

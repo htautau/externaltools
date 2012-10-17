@@ -1,75 +1,27 @@
 #!/usr/bin/env python
 
 from toolman import packages
-import subprocess
-import os
-
-
-def show_repo():
-
-    for name, path in packages.REPO.items():
-        print "%s => %s" % (name, path)
-
-
-def show_used(packages_file):
-
-    for package in packages.read_packages(packages_file):
-        print "%s => %s" % (package.name, package.path)
-
-
-def show_tags(user, package):
-    
-    for tag in packages.list_tags(user, package):
-        print tag
-
-
-def show_updates(user, packages_file):
-
-    for package in packages.read_packages(packages_file):
-        if package.tag is not None:
-            # only look for updates if we are not using the trunk
-            tags = packages.list_tags(user, package.name)
-            tags.sort()
-            if package not in tags:
-                print "Package %s is not an available tag" % package
-                continue
-            newer_packages = tags[tags.index(package) + 1:]
-            if newer_packages:
-                if len(newer_packages) == 1:
-                    print "A newer tag of package %s is available:" % (
-                        package.name)
-                else:
-                    print "Newer tags of package %s are available:" % (
-                        package.name)
-                for p in newer_packages:
-                    print p
-                print "You are using %s" % package
-                print
-
-
 from argparse import ArgumentParser
 
 parser = ArgumentParser()
 subparsers = parser.add_subparsers()
 
 parser_show = subparsers.add_parser('show')
-parser_show.set_defaults(op=show_repo)
+parser_show.set_defaults(op=packages.show_repo)
 
 parser_used = subparsers.add_parser('used')
-parser_used.add_argument('packages_file',
-        nargs='?', default='packages.txt')
-parser_used.set_defaults(op=show_used)
+parser_used.add_argument('bundle')
+parser_used.set_defaults(op=packages.show_used)
 
 parser_tags = subparsers.add_parser('tags')
 parser_tags.add_argument('-u', '--user', required=True)
 parser_tags.add_argument('package')
-parser_tags.set_defaults(op=show_tags)
+parser_tags.set_defaults(op=packages.show_tags)
 
 parser_updates = subparsers.add_parser('updates')
 parser_updates.add_argument('-u', '--user', required=True)
-parser_updates.add_argument('packages_file', default='packages.txt',
-        nargs='?')
-parser_updates.set_defaults(op=show_updates)
+parser_updates.add_argument('bundle')
+parser_updates.set_defaults(op=packages.show_updates)
 
 args = parser.parse_args()
 cmd_args = dict(args._get_kwargs())
