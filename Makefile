@@ -1,5 +1,8 @@
 all: config build install
 
+clean-pyc:
+	find externaltools -name "*.pyc" | xargs rm -f
+
 clean:
 	./waf distclean
 	rm -rf externaltools
@@ -10,5 +13,8 @@ config:
 build:
 	./waf build
 
-install:
+install: clean-pyc
 	./waf install
+
+test:
+	python test.py

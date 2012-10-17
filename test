@@ -1,4 +1,0 @@
-#!/bin/bash
-
-source externaltools/setup.sh
-python test.py

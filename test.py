@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from toolman import packages
+import ROOT
 
 
 for bundle in packages.list_bundles():

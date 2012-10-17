@@ -18,20 +18,66 @@ out = 'build'
 init_template = """\
 class ResourceNotFound(Exception):
     pass
+
+
+LOADED_LIBRARIES = {}
+
+
+def register_loaded(bundle, library):
+
+    if bundle not in LOADED_LIBRARIES:
+        LOADED_LIBRARIES[bundle] = []
+    
+    # check if this library was already loaded in another bundle
+    for other_bundle, libs in LOADED_LIBRARIES.items():
+        if other_bundle == bundle:
+            continue
+        if library in libs:
+            raise ValueError(
+                'Attempted to load the same library (%s) from two bundles' %
+                library)
+    if library not in LOADED_LIBRARIES[bundle]:
+        LOADED_LIBRARIES[bundle].append(library)
+        return False
+    return True
+"""
+
+bundle_init_template = """\
+import ROOT
+import os
+from .. import register_loaded
+
+
+NAME = {bundle}
+HERE = os.path.dirname(os.path.abspath(__file__))
+
+
+def load_library(name):
+    
+    # first recurse on dependencies
+    deps_file = open(os.path.join(HERE, name, 'deps'), 'r')
+    for dep in deps_file.readlines():
+        load_library(dep.strip())
+    lib_path = os.path.join(HERE, name, 'lib%s.so' % name)
+    # ignore packages that didn't produce a library (headers only)
+    if os.path.isfile(lib_path):
+        if not register_loaded(NAME, name):
+            ROOT.gSystem.Load(lib_path)
 """
 
 package_init_template = """\
 # this is generated code
+import ROOT
 import os
 from ... import ResourceNotFound
-import ROOT
+from .. import load_library
 
 
-ROOT.gSystem.Load(os.path.join(
-    os.path.dirname(__file__), '{LIBRARY}'))
+HERE = os.path.dirname(os.path.abspath(__file__))
+load_library('{package}')
+
 RESOURCE_PATH = os.path.join(
-    os.path.dirname(
-        os.path.abspath(__file__)), 'share') + os.path.sep
+    HERE, 'share') + os.path.sep
 
 
 def get_resource(name=''):
@@ -83,6 +129,9 @@ def configure(conf):
     conf.find_program('rootcint')
 
 
+LIBRARY_DEPENDENCIES = {}
+
+
 def build(bld):
             
     if bld.cmd == 'install':
@@ -108,6 +157,9 @@ def build(bld):
         if not packages.bundle_fetched(bundle):
             continue
 
+        if bundle not in LIBRARY_DEPENDENCIES:
+            LIBRARY_DEPENDENCIES[bundle] = {}
+
         package_names = packages.list_packages(bundle)
         bld.env['PACKAGES_%s' % bundle] = package_names
         
@@ -115,6 +167,9 @@ def build(bld):
         bld.add_group('libs_%s' % bundle)
 
         for name in package_names:
+            
+            if name not in LIBRARY_DEPENDENCIES[bundle]:
+                LIBRARY_DEPENDENCIES[bundle][name] = []
             
             PATH = join(packages.PACKAGE_DIR, bundle, name)
 
@@ -138,6 +193,7 @@ def build(bld):
                                      (name, DEP))
                         INCLUDES.append(join(packages.PACKAGE_DIR, bundle, DEP))
                         LIB_DEPENDS.append(DEP)
+                        LIBRARY_DEPENDENCIES[bundle][name].append(DEP)
                         #LINKFLAGS.append('-l%s' % DEP)
             else:
                 SOURCES = bld.path.ant_glob(join(PATH, 'src', '*.cxx'))
@@ -184,7 +240,7 @@ def build(bld):
                     source=SOURCES,
                     dynamic_source=DICT_SRC,
                     target=name,
-                    use=LIB_DEPENDS,
+                    #use=LIB_DEPENDS,
                     install_path='${PREFIX}/%s/%s' % (
                         packages.bundle_to_name(bundle), name))
             
@@ -224,7 +280,9 @@ def build_python_package(bld):
             os.mkdir(base_bundle)
         
         # create bundle __init__.py
-        open(join(base_bundle, '__init__.py'), 'w').close()
+        bundle_init = open(join(base_bundle, '__init__.py'), 'w')
+        bundle_init.write(bundle_init_template.format(**locals()))
+        bundle_init.close()
 
         for package in bld.env['PACKAGES_%s' % bundle]:
             LIBRARY = 'lib%s.so' % package
@@ -237,6 +295,12 @@ def build_python_package(bld):
             package_init_file.write(package_init_template.format(**locals()))
             package_init_file.close()
             
+            # write dependencies file
+            dep_file = open(join(base_package, 'deps'), 'w')
+            for dep in LIBRARY_DEPENDENCIES[bundle][package]:
+                dep_file.write('%s\n' % dep)
+            dep_file.close()
+
             # copy data
             # check for either data/ or share/
             share_data = join(packages.PACKAGE_PATH, bundle, package, 'share')
