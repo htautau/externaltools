@@ -17,6 +17,9 @@ top = '.'
 out = 'build'
 
 init_template = """\
+import os
+import ROOT
+
 class ResourceNotFound(Exception):
     pass
 
@@ -39,7 +42,7 @@ def register_loaded(bundle, package):
             raise RuntimeError(
                 'Attempted to load the same package (%s) from two bundles' %
                 package)
-    if library not in LOADED_PACKAGES[bundle]:
+    if package not in LOADED_PACKAGES[bundle]:
         LOADED_PACKAGES[bundle].append(package)
         return False
     return True
@@ -73,7 +76,7 @@ def load_library(bundle, package, deps=None):
 """
 
 bundle_init_template = """\
-NAME = {bundle}
+NAME = '{bundle}'
 """
 
 package_init_template = """\
@@ -85,8 +88,8 @@ from {depth} import load_library
 
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-NAME = {package.name}
-BUNDLE = {bundle}
+NAME = '{package.name}'
+BUNDLE = '{bundle}'
 
 # read dependencies
 DEPS = []
@@ -278,14 +281,10 @@ def build(bld):
             else:
                 install_path = '${PREFIX}/%s/lib' % bundle
             
-            target = name
-            if package.version_str is not None:
-                target = '%s.%s' % (target, package.version_str)
-
             shlib = bld.shlib(
                     source=SOURCES,
                     dynamic_source=DICT_SRC,
-                    target=target,
+                    target=package.dot_versioned_name,
                     #use=LIB_DEPENDS,
                     install_path=install_path)
             
@@ -347,7 +346,7 @@ def build_python_package(bld):
             # write dependencies file
             dep_file = open(join(base_package, 'deps'), 'w')
             for dep_bundle, dep in LIBRARY_DEPENDENCIES[bundle][package.name]:
-                dep_file.write('%s %s\n' % (dep_bundle, dep))
+                dep_file.write('%s %s\n' % (dep_bundle, dep.dot_versioned_name))
             dep_file.close()
 
             # copy data

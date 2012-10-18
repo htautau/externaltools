@@ -66,9 +66,11 @@ class Package(object):
                 self.version_str = '.'.join(map(str, self.version[:-1]))
             else:
                 self.version_str = '.'.join(map(str, self.version))
+            self.dot_versioned_name = '%s.%s' % (self.name, self.version_str)
         else:
             self.version = None
             self.version_str = None
+            self.dot_versioned_name = self.name
 
     def __str__(self):
 
