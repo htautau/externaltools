@@ -50,13 +50,16 @@ def register_loaded(bundle, package):
 
 def load_package(bundle, package, deps=None):
     
+    package_name = package.split('.')[0]
     # read the deps if not supplied
     if deps is None:
         deps = []
         if bundle == NAME:
-            deps_file = open(os.path.join(HERE, package, 'deps'), 'r')
+            deps_file = open(
+                os.path.join(HERE, package_name, 'deps'), 'r')
         else:
-            deps_file = open(os.path.join(HERE, bundle, package, 'deps'), 'r')
+            deps_file = open(
+                os.path.join(HERE, bundle, package_name, 'deps'), 'r')
         for dep in deps_file.readlines():
             deps.append(dep.strip().split())
         deps_file.close()
@@ -71,7 +74,7 @@ def load_package(bundle, package, deps=None):
     
     # ignore packages that didn't produce a library (headers only)
     if os.path.isfile(lib_path):
-        if not register_loaded(bundle, package.split('.')[0]):
+        if not register_loaded(bundle, package_name):
             ROOT.gSystem.Load(lib_path)
 """
 
