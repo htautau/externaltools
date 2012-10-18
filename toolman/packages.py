@@ -3,6 +3,7 @@ import sys
 import re
 import shutil
 import subprocess
+import operator
 
 
 PACKAGE_PATTERN = re.compile('(?P<name>\w+)(?P<tag>(?:-\d{2}){3}(?:-\d{2})?)?')
@@ -74,6 +75,16 @@ class Package(object):
             return self.name + self.tag
         else:
             return self.name
+
+    def __hash__(self):
+
+        return hash((self.name, self.tag, self.path))
+
+    def __eq__(self, other):
+
+        return (self.name == other.name and
+                self.tag == other.tag and
+                self.path == other.path)
 
     def __cmp__(self, other):
 
@@ -193,27 +204,61 @@ def show_updates(user, bundle):
                 print
 
 
-def fetch(bundle, user):
+def get_partitioning():
+
+    # determine packages in common between bundles
+    # and for each package in the common packages that depends on a package that
+    # isn't in common between the bundles (different tags), count that package
+    # as being unique to each bundle. Repeat until no packages in the common
+    # packages depends on a package in the bundle-specific package collections.
+    # Return a dict mapping bundle names and 'common' (no bundle can be named
+    # 'common') to packages.
+    partitioning = {}
+    for bundle in list_bundles():
+        if bundle == 'common':
+            raise NameError('A bundle has an illegal name: common')
+        bundle_packages = set()
+        for package in read_packages(bundle):
+            for other_package in bundle_packages:
+                # error if multiple packages with same name and possibly
+                # different tags, so Package.__eq__ doesn't work here.
+                if other_package.name == package.name:
+                    raise NameError("Duplicate packages in bundle %s: %s %s" % (
+                        bundle, package, other_package))
+            bundle_packages.add(package)
+        partitioning[bundle_to_name(bundle)] = bundle_packages
+    # determine largest common subset of packages between bundles
+    # this is the intersection of all sets
+    common_packages = reduce(operator.__and__, partitioning.values())
+    # remove packages from each bundle that are common
+    for bundle, bundle_packages in partitioning.items():
+        bundle_packages.difference_update(common_packages)
+    partitioning['common'] = common_packages
+    return partitioning
+
+
+def fetch(user):
 
     svnbase = SVNBASE.format(**locals())
-
-    for package in read_packages(bundle):
-        url = os.path.join(svnbase, package.path)
-        outpath = os.path.join(PACKAGE_PATH, bundle, package.name)
-        print
-        # update
-        if os.path.exists(outpath):
-            print "Updating %s..." % package.name
-            print "This will remove and recreate %s" % outpath
-            if raw_input("Continue? (Y/[n]) ") == 'Y':
-                shutil.rmtree(outpath)
-                print
-            else:
-                continue
-        # checkout
-        print "Checking out %s (%s) ..." % (package.name, package.path)
-        if subprocess.call(['svn', 'co', url, outpath]):
-            print "Failed to checkout %s!" % package.name
+    partitioning = get_partitioning()
+    for bundle, packages in partitioning.items():
+        for package in packages:
+            url = os.path.join(svnbase, package.path)
+            outpath = os.path.join(PACKAGE_PATH, bundle, package.name)
+            print
+            # update
+            if os.path.exists(outpath):
+                print "Updating %s..." % package.name
+                print "This will remove and recreate %s" % outpath
+                if raw_input("Continue? (Y/[n]) ") == 'Y':
+                    shutil.rmtree(outpath)
+                    print
+                else:
+                    continue
+            # checkout
+            print "Checking out %s (%s) ..." % (package.name, package.path)
+            if subprocess.call(['svn', 'co', url, outpath]):
+                print "Failed to checkout %s!" % package.name
 
 
 def bundle_to_name(bundle):

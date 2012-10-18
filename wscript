@@ -5,10 +5,11 @@ import os
 import sys
 import shutil
 
-from toolman import packages
+from waflib import Build, Utils, TaskGen, Logs
+
+import toolman
 from toolman import rootcore
 
-from waflib import Build, Utils, TaskGen, Logs
 
 join = os.path.join
 
@@ -20,61 +21,81 @@ class ResourceNotFound(Exception):
     pass
 
 
-LOADED_LIBRARIES = {}
+LOADED_PACKAGES = {}
+HERE = os.path.dirname(os.path.abspath(__file__))
+NAME = 'common'
 
 
-def register_loaded(bundle, library):
+def register_loaded(bundle, package):
 
-    if bundle not in LOADED_LIBRARIES:
-        LOADED_LIBRARIES[bundle] = []
+    if bundle not in LOADED_PACKAGES:
+        LOADED_PACKAGES[bundle] = []
     
-    # check if this library was already loaded in another bundle
-    for other_bundle, libs in LOADED_LIBRARIES.items():
-        if other_bundle == bundle:
+    # check if this library was already loaded in another non-common bundle
+    for other_bundle, libs in LOADED_PACKAGES.items():
+        if other_bundle in (bundle, NAME):
             continue
         if library in libs:
             raise RuntimeError(
-                'Attempted to load the same library (%s) from two bundles' %
-                library)
-    if library not in LOADED_LIBRARIES[bundle]:
-        LOADED_LIBRARIES[bundle].append(library)
+                'Attempted to load the same package (%s) from two bundles' %
+                package)
+    if library not in LOADED_PACKAGES[bundle]:
+        LOADED_PACKAGES[bundle].append(package)
         return False
     return True
+
+
+def load_library(bundle, package, deps=None):
+    
+    # read the deps if not supplied
+    if deps is None:
+        deps = []
+        if bundle == NAME:
+            deps_file = open(os.path.join(HERE, package, 'deps'), 'r')
+        else:
+            deps_file = open(os.path.join(HERE, bundle, package, 'deps'), 'r')
+        for dep in deps_file.readlines():
+            deps.append(dep.strip().split())
+        deps_file.close()
+
+    # first recurse on dependencies
+    for bundle, dep in deps:
+        load_library(bundle, dep)
+    if bundle == NAME:
+        lib_path = os.path.join(HERE, 'lib', 'lib%s.so' % package)
+    else:
+        lib_path = os.path.join(HERE, bundle, 'lib', 'lib%s.so' % package)
+    
+    # ignore packages that didn't produce a library (headers only)
+    if os.path.isfile(lib_path):
+        if not register_loaded(bundle, package):
+            ROOT.gSystem.Load(lib_path)
 """
 
 bundle_init_template = """\
-import ROOT
-import os
-from .. import register_loaded
-
-
 NAME = {bundle}
-HERE = os.path.dirname(os.path.abspath(__file__))
-
-
-def load_library(name):
-    
-    # first recurse on dependencies
-    deps_file = open(os.path.join(HERE, name, 'deps'), 'r')
-    for dep in deps_file.readlines():
-        load_library(dep.strip())
-    lib_path = os.path.join(HERE, 'lib', 'lib%s.so' % name)
-    # ignore packages that didn't produce a library (headers only)
-    if os.path.isfile(lib_path):
-        if not register_loaded(NAME, name):
-            ROOT.gSystem.Load(lib_path)
 """
 
 package_init_template = """\
 # this is generated code
 import ROOT
 import os
-from ... import ResourceNotFound
-from .. import load_library
+from {depth} import ResourceNotFound
+from {depth} import load_library
 
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-load_library('{package}')
+NAME = {package.name}
+BUNDLE = {bundle}
+
+# read dependencies
+DEPS = []
+deps_file = open(os.path.join(HERE, 'deps'), 'r')
+for dep in deps_file.readlines():
+    DEPS.append(dep.strip().split())
+deps_file.close()
+
+load_library(BUNDLE, NAME, DEPS)
 
 RESOURCE_PATH = os.path.join(
     HERE, 'share') + os.path.sep
@@ -137,7 +158,9 @@ def build(bld):
     if bld.cmd == 'install':
         if os.path.exists(bld.options.prefix):
             print "%s already exists." % bld.options.prefix
-            if raw_input("Its contents could be overwritten! Continue? Y/[n]: ") != 'Y':
+            if (raw_input(
+                "Its contents could be overwritten! Continue? Y/[n]: ")
+                != 'Y'):
                 return
         bld.add_post_fun(build_python_package)
 
@@ -151,27 +174,26 @@ def build(bld):
         'grep include ${SRC} > ${TGT}-tmp || true; '
         'cat ${TGT} >> ${TGT}-tmp; '
         'mv ${TGT}-tmp ${TGT}')
-
-    for bundle in packages.list_bundles():
-
-        if not packages.bundle_fetched(bundle):
-            continue
-
+    partitioning = toolman.packages.get_partitioning()
+    for bundle, packages in partitioning.items():
+        
         if bundle not in LIBRARY_DEPENDENCIES:
             LIBRARY_DEPENDENCIES[bundle] = {}
 
-        package_names = packages.list_packages(bundle)
-        bld.env['PACKAGES_%s' % bundle] = package_names
+        bld.env['PACKAGES_%s' % bundle] = packages
         
         bld.add_group('dicts_%s' % bundle)
         bld.add_group('libs_%s' % bundle)
 
-        for name in package_names:
+        BUNDLE_PATH = join(toolman.packages.PACKAGE_DIR, bundle)
+
+        for package in packages:
+            name = package.name
             
             if name not in LIBRARY_DEPENDENCIES[bundle]:
                 LIBRARY_DEPENDENCIES[bundle][name] = []
             
-            PATH = join(packages.PACKAGE_DIR, bundle, name)
+            PATH = join(BUNDLE_PATH, name)
 
             LIB_DEPENDS = []
             INCLUDES = []
@@ -186,15 +208,30 @@ def build(bld):
                 # check for dependencies on other packages
                 if 'PACKAGE_DEP' in make:
                     DEPS = make['PACKAGE_DEP'].split()
-                    #LINKFLAGS.append('-Lexternaltools/lib')
                     for DEP in DEPS:
-                        if DEP not in package_names:
-                            sys.exit('Package %s depends on %s but it is not present' %
-                                     (name, DEP))
-                        INCLUDES.append(join(packages.PACKAGE_DIR, bundle, DEP))
-                        LIB_DEPENDS.append(DEP)
-                        LIBRARY_DEPENDENCIES[bundle][name].append(DEP)
-                        #LINKFLAGS.append('-l%s' % DEP)
+                        # search for DEP in this bundle
+                        # and if not found look in common
+                        found = False
+                        dep_bundle = None
+                        for other_package in packages:
+                            if DEP == other_package.name:
+                                found = True
+                                dep_bundle = bundle
+                        if not found and bundle != 'common':
+                            # check in common
+                            for other_package in partitioning['common']:
+                                if DEP == other_package.name:
+                                    found = True
+                                    dep_bundle = 'common'
+                        if not found:
+                            sys.exit('Package %s depends on %s '
+                                     'but it is not present' % (name, DEP))
+                        INCLUDES.append(
+                            join(toolman.packages.PACKAGE_DIR,
+                                 dep_bundle, DEP))
+                        LIB_DEPENDS.append((dep_bundle, DEP))
+                        LIBRARY_DEPENDENCIES[bundle][name].append(
+                                (dep_bundle, DEP))
             else:
                 SOURCES = bld.path.ant_glob(join(PATH, 'src', '*.cxx'))
                 if not SOURCES:
@@ -227,22 +264,26 @@ def build(bld):
                     pass
                 bld.set_group('dicts_%s' % bundle)
                 rbld = bld(
-                    rule=rootcint_cmd,
-                    source=linkdef,
-                    target=DICT_SRC)
+                        rule=rootcint_cmd,
+                        source=linkdef,
+                        target=DICT_SRC)
                 rbld.env.append_value('ROOTCINT_INCLUDES',
                         ' '.join(['-I../%s' % inc for inc in INCLUDES]))
                 if make is not None:
                     rootcore.define_env(rbld.env, make)
             
             bld.set_group('libs_%s' % bundle)
+            if bundle == 'common':
+                install_path = '${PREFIX}/lib'
+            else:
+                install_path = '${PREFIX}/%s/lib' % bundle
+
             shlib = bld.shlib(
                     source=SOURCES,
                     dynamic_source=DICT_SRC,
                     target=name,
                     #use=LIB_DEPENDS,
-                    install_path='${PREFIX}/%s/lib' %
-                        packages.bundle_to_name(bundle))
+                    install_path=install_path)
             
             if make is not None:
                 rootcore.define_env(shlib.env, make)
@@ -270,23 +311,27 @@ def build_python_package(bld):
     setup_file.write(setup_template)
     setup_file.close()
     
-    for bundle in packages.list_bundles():
-
-        if not packages.bundle_fetched(bundle):
-            continue
+    partitioning = toolman.packages.get_partitioning()
+    for bundle, packages in partitioning.items():
         
-        base_bundle = join(bld.options.prefix, packages.bundle_to_name(bundle))
-        if not os.path.exists(base_bundle):
-            os.mkdir(base_bundle)
+        if bundle == 'common':
+            depth = '..'
+            base_bundle = bld.options.prefix
+        else:
+            depth = '...'
+            base_bundle = join(
+                    bld.options.prefix, bundle)
+            if not os.path.exists(base_bundle):
+                os.mkdir(base_bundle)
         
-        # create bundle __init__.py
-        bundle_init = open(join(base_bundle, '__init__.py'), 'w')
-        bundle_init.write(bundle_init_template.format(**locals()))
-        bundle_init.close()
+            # create bundle __init__.py
+            bundle_init = open(join(base_bundle, '__init__.py'), 'w')
+            bundle_init.write(bundle_init_template.format(**locals()))
+            bundle_init.close()
 
         for package in bld.env['PACKAGES_%s' % bundle]:
             LIBRARY = 'lib%s.so' % package
-            base_package = join(base_bundle, package)
+            base_package = join(base_bundle, package.name)
             if not os.path.exists(base_package):
                 os.mkdir(base_package)
             
@@ -297,23 +342,24 @@ def build_python_package(bld):
             
             # write dependencies file
             dep_file = open(join(base_package, 'deps'), 'w')
-            for dep in LIBRARY_DEPENDENCIES[bundle][package]:
-                dep_file.write('%s\n' % dep)
+            for dep_bundle, dep in LIBRARY_DEPENDENCIES[bundle][package.name]:
+                dep_file.write('%s %s\n' % (dep_bundle, dep))
             dep_file.close()
 
             # copy data
             # check for either data/ or share/
-            share_data = join(packages.PACKAGE_PATH, bundle, package, 'share')
-            data_data = join(packages.PACKAGE_PATH, bundle, package, 'data')
+            share_data = join(toolman.packages.PACKAGE_PATH, bundle, package.name, 'share')
+            data_data = join(toolman.packages.PACKAGE_PATH, bundle, package.name, 'data')
             data = None
             if os.path.exists(share_data) and os.path.exists(data_data):
-                Logs.error("Both share/ and data/ exist for package %s!" % package)
+                Logs.error("Both share/ and data/ exist for package %s!" %
+                        package)
             elif os.path.exists(share_data):
                 data = share_data
             elif os.path.exists(data_data):
                 data = data_data
             if data is not None:
-                Logs.info("Copying data for package %s..." % package)
+                Logs.info("Copying data for package %s ..." % package)
                 dest = join(base_package, 'share')
                 if os.path.exists(dest):
                     shutil.rmtree(dest)
@@ -325,8 +371,8 @@ def build_python_package(bld):
 @TaskGen.before('process_source')
 def dynamic_post(self):
     """
-    bld(dynamic_source='*.cxx', ..) will search for source files to add to the attribute 'source'
-    we could also call "eval" or whatever expression
+    bld(dynamic_source='*.cxx', ..) will search for source files to add
+    to the attribute 'source' we could also call "eval" or whatever expression
     """
     if not getattr(self, 'dynamic_source', None):
         return

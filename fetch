@@ -6,9 +6,8 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('-u', '--user', required=True,
         help="CERN username")
-parser.add_argument('bundle')
 args = parser.parse_args()
 
 from toolman import packages
 
-packages.fetch(args.bundle, args.user)
+packages.fetch(args.user)
