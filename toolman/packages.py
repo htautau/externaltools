@@ -62,8 +62,13 @@ class Package(object):
             if not match:
                 raise ValueError("Tag %s not understood" % tag)
             self.version = map(int, match.groups(-1))
+            if self.version[-1] == -1:
+                self.version_str = '.'.join(map(str, self.version[:-1]))
+            else:
+                self.version_str = '.'.join(map(str, self.version))
         else:
             self.version = None
+            self.version_str = None
 
     def __str__(self):
 

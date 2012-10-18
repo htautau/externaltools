@@ -211,19 +211,19 @@ def build(bld):
                     for DEP in DEPS:
                         # search for DEP in this bundle
                         # and if not found look in common
-                        found = False
                         dep_bundle = None
+                        dep_package = None
                         for other_package in packages:
                             if DEP == other_package.name:
-                                found = True
                                 dep_bundle = bundle
-                        if not found and bundle != 'common':
+                                dep_package = other_package
+                        if dep_bundle is None and bundle != 'common':
                             # check in common
                             for other_package in partitioning['common']:
                                 if DEP == other_package.name:
-                                    found = True
                                     dep_bundle = 'common'
-                        if not found:
+                                    dep_package = other_package
+                        if dep_bundle is None:
                             sys.exit('Package %s depends on %s '
                                      'but it is not present' % (name, DEP))
                         INCLUDES.append(
@@ -231,7 +231,7 @@ def build(bld):
                                  dep_bundle, DEP))
                         LIB_DEPENDS.append((dep_bundle, DEP))
                         LIBRARY_DEPENDENCIES[bundle][name].append(
-                                (dep_bundle, DEP))
+                                (dep_bundle, dep_package))
             else:
                 SOURCES = bld.path.ant_glob(join(PATH, 'src', '*.cxx'))
                 if not SOURCES:
@@ -277,11 +277,15 @@ def build(bld):
                 install_path = '${PREFIX}/lib'
             else:
                 install_path = '${PREFIX}/%s/lib' % bundle
+            
+            target = name
+            if package.version_str is not None:
+                target = '%s.%s' % (target, package.version_str)
 
             shlib = bld.shlib(
                     source=SOURCES,
                     dynamic_source=DICT_SRC,
-                    target=name,
+                    target=target,
                     #use=LIB_DEPENDS,
                     install_path=install_path)
             
