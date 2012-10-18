@@ -20,6 +20,7 @@ init_template = """\
 import os
 import ROOT
 
+
 class ResourceNotFound(Exception):
     pass
 
@@ -31,24 +32,23 @@ NAME = 'common'
 
 def register_loaded(bundle, package):
 
-    if bundle not in LOADED_PACKAGES:
-        LOADED_PACKAGES[bundle] = []
-    
-    # check if this library was already loaded in another non-common bundle
+    # check if this package was already loaded in another non-common bundle
     for other_bundle, libs in LOADED_PACKAGES.items():
         if other_bundle in (bundle, NAME):
             continue
-        if library in libs:
+        if package in libs:
             raise RuntimeError(
                 'Attempted to load the same package (%s) from two bundles' %
                 package)
+    if bundle not in LOADED_PACKAGES:
+        LOADED_PACKAGES[bundle] = []
     if package not in LOADED_PACKAGES[bundle]:
         LOADED_PACKAGES[bundle].append(package)
         return False
     return True
 
 
-def load_library(bundle, package, deps=None):
+def load_package(bundle, package, deps=None):
     
     # read the deps if not supplied
     if deps is None:
@@ -63,7 +63,7 @@ def load_library(bundle, package, deps=None):
 
     # first recurse on dependencies
     for bundle, dep in deps:
-        load_library(bundle, dep)
+        load_package(bundle, dep)
     if bundle == NAME:
         lib_path = os.path.join(HERE, 'lib', 'lib%s.so' % package)
     else:
@@ -71,7 +71,7 @@ def load_library(bundle, package, deps=None):
     
     # ignore packages that didn't produce a library (headers only)
     if os.path.isfile(lib_path):
-        if not register_loaded(bundle, package):
+        if not register_loaded(bundle, package.split('.')[0]):
             ROOT.gSystem.Load(lib_path)
 """
 
@@ -84,11 +84,11 @@ package_init_template = """\
 import ROOT
 import os
 from {depth} import ResourceNotFound
-from {depth} import load_library
+from {depth} import load_package
 
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-NAME = '{package.name}'
+NAME = '{package.dot_versioned_name}'
 BUNDLE = '{bundle}'
 
 # read dependencies
@@ -98,7 +98,7 @@ for dep in deps_file.readlines():
     DEPS.append(dep.strip().split())
 deps_file.close()
 
-load_library(BUNDLE, NAME, DEPS)
+load_package(BUNDLE, NAME, DEPS)
 
 RESOURCE_PATH = os.path.join(
     HERE, 'share') + os.path.sep
