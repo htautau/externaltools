@@ -1,4 +1,8 @@
-import functools
+
+
+def partial(func, *args, **kwds):
+    "Emulate Python2.6's functools.partial"
+    return lambda *fargs, **fkwds: func(*(args+fargs), **dict(kwds, **fkwds))
 
 
 def grep(filename, patterns):
@@ -35,4 +39,4 @@ class memoized(object):
       return self.func.__doc__
    def __get__(self, obj, objtype):
       '''Support instance methods.'''
-      return functools.partial(self.__call__, obj)
+      return partial(self.__call__, obj)
