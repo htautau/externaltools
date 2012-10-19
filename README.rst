@@ -7,7 +7,7 @@ About
 "external" tools we use (MissingMassCalculator, PileupReweighting,
 TauTriggerCorrections, etc.)
 
-The file "packages.txt" contains a list of the packages and the format of each
+Each bundle in bundles/ contains a list of the packages and the format of each
 line is as follows::
 
    [package name] [path to package (trunk, or a specific tag or branch) in svn]
