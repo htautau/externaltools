@@ -143,7 +143,8 @@ def read_packages(bundle):
 
 def list_bundles():
 
-    return [os.path.splitext(name)[0] for name in os.listdir(BUNDLES_DIR)]
+    return [os.path.splitext(name)[0] for name in os.listdir(BUNDLES_DIR)
+            if not name.startswith('.')]
 
 
 def bundle_fetched(bundle):
