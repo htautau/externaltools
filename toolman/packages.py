@@ -47,7 +47,15 @@ def read_file(name):
 
 REPO = {}
 for line in read_file(REPOS_FILE):
-    REPO[os.path.basename(line)] = line
+    package = os.path.basename(line)
+    if package in REPO:
+        # package with the same name from different repositories
+        curr_package = REPO[package]
+        del REPO[package]
+        REPO[curr_package] = curr_package
+        REPO[line] = line
+    else:
+        REPO[package] = line
 
 
 class Package(object):
@@ -79,9 +87,9 @@ class Package(object):
     def __repr__(self):
 
         if self.tag is not None:
-            return self.name + self.tag
+            return os.path.join(self.path, self.name + self.tag)
         else:
-            return self.name
+            return os.path.join(self.path, self.name)
 
     def __hash__(self):
 
@@ -111,21 +119,22 @@ class Package(object):
         return cmp(self.version, other.version)
 
 
-def make_package(token):
+def make_package(package, path=None):
 
-    token = token.strip('/ ')
-    match = re.match(PACKAGE_PATTERN, token)
+    match = re.match(PACKAGE_PATTERN, package)
     if not match:
-        print "Not a valid package name: %s" % token
-        return None
+        raise ValueError("Not a valid package name: %s" % package)
     name = match.group('name')
-    if name not in REPO:
-        print "Package %s not in repo.txt: %s" % name
-        return None
-    base_path = REPO[name]
+    if path is not None:
+        base_path = os.path.join(path, name)
+    else:
+        if name not in REPO:
+            raise ValueError('package %s not found in any listed repositories' %
+                    name)
+        base_path = REPO[name]
     tag = None
     if match.group('tag'):
-        path = os.path.join(base_path, 'tags', token)
+        path = os.path.join(base_path, 'tags', package)
         tag = match.group('tag')
     else: # assume trunk
         path = os.path.join(base_path, 'trunk')
@@ -135,10 +144,8 @@ def make_package(token):
 def read_packages(bundle):
 
     print "Reading packages in bundle %s ..." % bundle
-    for token in read_file(os.path.join(BUNDLES_DIR, '%s.lst' % bundle)):
-        package = make_package(token)
-        if package:
-            yield package
+    for line in read_file(os.path.join(BUNDLES_DIR, '%s.lst' % bundle)):
+        yield make_package(*line.split())
 
 
 def list_bundles():

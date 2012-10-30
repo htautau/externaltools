@@ -11,7 +11,7 @@ CoEPPD3PDReader
 CoEPPTrigTool
 # last 2011 tag
 TauTriggerCorrections-00-00-02
-TauFakeRates
+TauFakeRates atlasphys/Physics/Higgs/HSG4/software/hadhad
 #TauFakeRates2012
 MissingMassCalculator-00-00-09
 TauDiscriminant

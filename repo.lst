@@ -18,6 +18,7 @@ atlasoff/Reconstruction/egamma/egammaAnalysis/egammaAnalysisUtils
 atlasoff/Reconstruction/egamma/egammaEvent
 atlasphys/Physics/Higgs/HSG4/software/hadhad/TauFakeRates
 #atlasphys/Physics/Higgs/HSG4/software/hadhad/TauFakeRates2012
+atlasusr/morgens/TauFakeRates
 atlasoff/PhysicsAnalysis/AnalysisCommon/MissingMassCalculator
 atlasoff/PhysicsAnalysis/HiggsPhys/ggFReweighting
 atlasusr/mbecking/HSG4TriggerSF

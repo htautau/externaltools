@@ -11,7 +11,7 @@ CoEPPD3PDReader
 CoEPPTrigTool
 # latest 2012 tag
 TauTriggerCorrections-00-01-03
-TauFakeRates
+TauFakeRates-12-00-03 atlasusr/morgens
 #TauFakeRates2012
 MissingMassCalculator-00-00-09
 TauDiscriminant
