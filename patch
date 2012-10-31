@@ -1,31 +1,31 @@
 #!/bin/bash
 
-#if [ -d src/2011/JetUncertainties ]
+#if [ -d src/common/JetUncertainties ]
 #then
 #    echo "patching JetUncertainties..."
-#    if [ ! -d src/2011/JetUncertainties/share/analysisPlots ]
+#    if [ ! -d src/common/JetUncertainties/share/analysisPlots ]
 #    then
-#        cp -r src/2011/JetUncertainties/analysisPlots src/2011/JetUncertainties/share/analysisPlots
+#        cp -r src/common/JetUncertainties/analysisPlots src/common/JetUncertainties/share/analysisPlots
 #    fi
-#    cp patches/JetUncertainties/*.config src/2011/JetUncertainties/share/
+#    cp patches/JetUncertainties/*.config src/common/JetUncertainties/share/
 #fi
-if [ -d src/2011/CoEPPTrigTool ]
+if [ -d src/common/CoEPPTrigTool ]
 then
     echo "patching CoEPPTrigTool..."
-    cp patches/CoEPPTrigTool/config_EF_DiTau.xml src/2011/CoEPPTrigTool/share/
-    cp patches/CoEPPTrigTool/config_EF_DiTau_with_resurrected.xml src/2011/CoEPPTrigTool/share/
+    cp patches/CoEPPTrigTool/config_EF_DiTau.xml src/common/CoEPPTrigTool/share/
+    cp patches/CoEPPTrigTool/config_EF_DiTau_with_resurrected.xml src/common/CoEPPTrigTool/share/
 
-    cp patches/CoEPPTrigTool/EF_tau29_medium1_tau20_medium1_Hypo_00_02_35.xml src/2011/CoEPPTrigTool/share/triggers/TrigTauHypo_00_02_35/
-    cp patches/CoEPPTrigTool/EF_tau29_medium1_tau20_medium1_Hypo_00_02_42.xml src/2011/CoEPPTrigTool/share/triggers/TrigTauHypo_00_02_42/
-    cp patches/CoEPPTrigTool/EF_tau29_medium1_tau20_medium1_Hypo_00_03_02.xml src/2011/CoEPPTrigTool/share/triggers/TrigTauHypo_00_03_02/
-    cp patches/CoEPPTrigTool/EF_tau29T_medium1_tau20T_medium1_Hypo_00_03_02.xml src/2011/CoEPPTrigTool/share/triggers/TrigTauHypo_00_03_02/
+    cp patches/CoEPPTrigTool/EF_tau29_medium1_tau20_medium1_Hypo_00_02_35.xml src/common/CoEPPTrigTool/share/triggers/TrigTauHypo_00_02_35/
+    cp patches/CoEPPTrigTool/EF_tau29_medium1_tau20_medium1_Hypo_00_02_42.xml src/common/CoEPPTrigTool/share/triggers/TrigTauHypo_00_02_42/
+    cp patches/CoEPPTrigTool/EF_tau29_medium1_tau20_medium1_Hypo_00_03_02.xml src/common/CoEPPTrigTool/share/triggers/TrigTauHypo_00_03_02/
+    cp patches/CoEPPTrigTool/EF_tau29T_medium1_tau20T_medium1_Hypo_00_03_02.xml src/common/CoEPPTrigTool/share/triggers/TrigTauHypo_00_03_02/
 fi
-if [ -d src/2011/TauTriggerCorrections ]
+if [ -d src/bundle_2011/TauTriggerCorrections ]
 then
     echo "patching TauTriggerCorrections..."
-    if [ -d src/2011/TauTriggerCorrections/root ]
+    if [ -d src/bundle_2011/TauTriggerCorrections/root ]
     then
-        mv src/2011/TauTriggerCorrections/root src/2011/TauTriggerCorrections/share
+        mv src/bundle_2011/TauTriggerCorrections/root src/bundle_2011/TauTriggerCorrections/share
     fi
 fi
 echo "done"
