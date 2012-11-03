@@ -6,9 +6,8 @@ GoodRunsLists
 PileupReweighting
 TrigRootAnalysis
 
-CoEPPCore
-CoEPPD3PDReader
-CoEPPTrigTool
+# new trigger emulation for 2012
+TauTriggerEmulation-00-00-00
 # latest 2012 tag
 TauTriggerCorrections-00-01-03
 TauFakeRates-12-00-03 atlasusr/morgens

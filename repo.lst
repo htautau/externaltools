@@ -4,6 +4,7 @@ atlasusr/wdavey/CoEPPCore
 atlasusr/wdavey/CoEPPD3PDReader
 atlasusr/wdavey/CoEPPTrigTool
 atlasusr/wdavey/TauTriggerCorrections
+atlasusr/wdavey/TauTriggerEmulation
 atlasoff/PhysicsAnalysis/TauID/TauDiscriminant
 atlasoff/Trigger/TrigAnalysis/TrigRootAnalysis
 atlasoff/Reconstruction/MissingETUtility

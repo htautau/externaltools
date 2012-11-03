@@ -2,7 +2,10 @@
 PYTHON ?= python
 PREFIX ?= externaltools
 
-all: config build install
+all: patch config build install
+
+patch:
+	./patch
 
 clean-pyc:
 	find $(PREFIX) -name "*.pyc" | xargs rm -f
