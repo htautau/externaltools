@@ -2,6 +2,7 @@
 
 from glob import glob
 import os
+from os.path import join
 import sys
 import shutil
 
@@ -10,8 +11,6 @@ from waflib import Build, Utils, TaskGen, Logs
 import toolman
 from toolman import rootcore
 
-
-join = os.path.join
 
 top = '.'
 out = 'build'
@@ -136,12 +135,19 @@ echo "sourcing ${EXTERNALTOOLS_SETUP}..."
 export PYTHONPATH=${EXTERNALTOOLS_DIR}${PYTHONPATH:+:$PYTHONPATH}
 """
 
-os.environ['PREFIX'] = join(os.path.abspath(os.curdir), 'externaltools')
-
 
 def options(opt):
 
     opt.load('compiler_cxx')
+    opt.add_option('--yall', default=False,
+        help="answer yes to all questions")
+    
+    # Default the prefix to ${PWD}/externaltools
+    prefix_option = opt.parser.get_option('--prefix')
+    old_default = prefix_option.default
+    new_default = join(os.path.abspath(os.curdir), 'externaltools')
+    opt.parser.set_default('prefix', new_default)
+    prefix_option.help = prefix_option.help.replace(old_default, new_default)
 
 
 def configure(conf):
@@ -161,10 +167,11 @@ LIBRARY_DEPENDENCIES = {}
 
 def build(bld):
             
+    bld.load('compiler_cxx')
     if bld.cmd == 'install':
         if os.path.exists(bld.options.prefix):
             print "%s already exists." % bld.options.prefix
-            if (raw_input(
+            if (not bld.options.yall and raw_input(
                 "Its contents could be overwritten! Continue? Y/[n]: ")
                 != 'Y'):
                 return
