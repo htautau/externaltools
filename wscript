@@ -256,6 +256,7 @@ def build(bld):
             INCLUDES.append(PATH) 
             # possible improper includes in source files
             INCLUDES.append(join(PATH, name))
+            INCLUDES.append(join(PATH, 'src'))
             
             DICT_SRC = None
             linkdef = rootcore.find_linkdef(PATH)

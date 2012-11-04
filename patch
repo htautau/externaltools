@@ -31,6 +31,10 @@ fi
 if [ -d src/bundle_2012/TauFakeRates ]
 then
     echo "patching TauFakeRates..."
-    cp patches/bundle_2012/TauFakeRates/LinkDef.h src/bundle_2012/TauFakeRates/TauFakeRates
+    if [ -d src/bundle_2012/TauFakeRates/include ]
+    then
+        mv src/bundle_2012/TauFakeRates/include src/bundle_2012/TauFakeRates/TauFakeRates
+    fi
+    cp patches/bundle_2012/TauFakeRates/LinkDef.h src/bundle_2012/TauFakeRates/TauFakeRates/
 fi
 echo "done"
