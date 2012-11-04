@@ -24,3 +24,5 @@ install:
 
 test:
 	$(PYTHON) test.py
+
+.PHONY: patch
