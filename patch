@@ -9,16 +9,16 @@
 #    fi
 #    cp patches/JetUncertainties/*.config src/common/JetUncertainties/share/
 #fi
-if [ -d src/common/CoEPPTrigTool ]
+if [ -d src/bundle_2011/CoEPPTrigTool ]
 then
     echo "patching CoEPPTrigTool..."
-    cp patches/CoEPPTrigTool/config_EF_DiTau.xml src/common/CoEPPTrigTool/share/
-    cp patches/CoEPPTrigTool/config_EF_DiTau_with_resurrected.xml src/common/CoEPPTrigTool/share/
+    cp patches/CoEPPTrigTool/config_EF_DiTau.xml src/bundle_2011/CoEPPTrigTool/share/
+    cp patches/CoEPPTrigTool/config_EF_DiTau_with_resurrected.xml src/bundle_2011/CoEPPTrigTool/share/
 
-    cp patches/CoEPPTrigTool/EF_tau29_medium1_tau20_medium1_Hypo_00_02_35.xml src/common/CoEPPTrigTool/share/triggers/TrigTauHypo_00_02_35/
-    cp patches/CoEPPTrigTool/EF_tau29_medium1_tau20_medium1_Hypo_00_02_42.xml src/common/CoEPPTrigTool/share/triggers/TrigTauHypo_00_02_42/
-    cp patches/CoEPPTrigTool/EF_tau29_medium1_tau20_medium1_Hypo_00_03_02.xml src/common/CoEPPTrigTool/share/triggers/TrigTauHypo_00_03_02/
-    cp patches/CoEPPTrigTool/EF_tau29T_medium1_tau20T_medium1_Hypo_00_03_02.xml src/common/CoEPPTrigTool/share/triggers/TrigTauHypo_00_03_02/
+    cp patches/CoEPPTrigTool/EF_tau29_medium1_tau20_medium1_Hypo_00_02_35.xml src/bundle_2011/CoEPPTrigTool/share/triggers/TrigTauHypo_00_02_35/
+    cp patches/CoEPPTrigTool/EF_tau29_medium1_tau20_medium1_Hypo_00_02_42.xml src/bundle_2011/CoEPPTrigTool/share/triggers/TrigTauHypo_00_02_42/
+    cp patches/CoEPPTrigTool/EF_tau29_medium1_tau20_medium1_Hypo_00_03_02.xml src/bundle_2011/CoEPPTrigTool/share/triggers/TrigTauHypo_00_03_02/
+    cp patches/CoEPPTrigTool/EF_tau29T_medium1_tau20T_medium1_Hypo_00_03_02.xml src/bundle_2011/CoEPPTrigTool/share/triggers/TrigTauHypo_00_03_02/
 fi
 if [ -d src/bundle_2011/TauTriggerCorrections ]
 then
@@ -27,5 +27,10 @@ then
     then
         mv src/bundle_2011/TauTriggerCorrections/root src/bundle_2011/TauTriggerCorrections/share
     fi
+fi
+if [ -d src/bundle_2012/TauFakeRates ]
+then
+    echo "patching TauFakeRates..."
+    cp patches/bundle_2012/TauFakeRates/LinkDef.h src/bundle_2012/TauFakeRates/TauFakeRates
 fi
 echo "done"
