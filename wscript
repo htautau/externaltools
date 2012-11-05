@@ -64,16 +64,18 @@ def load_package(bundle, package, deps=None):
         deps_file.close()
 
     # first recurse on dependencies
-    for bundle, dep in deps:
-        load_package(bundle, dep)
+    for dep_bundle, dep in deps:
+        load_package(dep_bundle, dep)
+    
     if bundle == NAME:
         lib_path = os.path.join(HERE, 'lib', 'lib%s.so' % package)
     else:
         lib_path = os.path.join(HERE, bundle, 'lib', 'lib%s.so' % package)
-    
+
     # ignore packages that didn't produce a library (headers only)
     if os.path.isfile(lib_path):
         if not register_loaded(bundle, package_name):
+            print "loading %s/%s ..." % (bundle, os.path.basename(lib_path))
             ROOT.gSystem.Load(lib_path)
 """
 

@@ -9,20 +9,21 @@
 #    fi
 #    cp patches/JetUncertainties/*.config src/common/JetUncertainties/share/
 #fi
-if [ -d src/bundle_2011/CoEPPTrigTool ]
+if [ -d src/common/TauTriggerEmulation ]
 then
-    echo "patching CoEPPTrigTool..."
-    cp patches/CoEPPTrigTool/config_EF_DiTau.xml src/bundle_2011/CoEPPTrigTool/share/
-    cp patches/CoEPPTrigTool/config_EF_DiTau_with_resurrected.xml src/bundle_2011/CoEPPTrigTool/share/
+    echo "patching TauTriggerEmulation ..."
+    share=src/common/TauTriggerEmulation/share
+    cp patches/TauTriggerEmulation/config_EF_DiTau.xml $share
+    cp patches/TauTriggerEmulation/config_EF_DiTau_with_resurrected.xml $share
 
-    cp patches/CoEPPTrigTool/EF_tau29_medium1_tau20_medium1_Hypo_00_02_35.xml src/bundle_2011/CoEPPTrigTool/share/triggers/TrigTauHypo_00_02_35/
-    cp patches/CoEPPTrigTool/EF_tau29_medium1_tau20_medium1_Hypo_00_02_42.xml src/bundle_2011/CoEPPTrigTool/share/triggers/TrigTauHypo_00_02_42/
-    cp patches/CoEPPTrigTool/EF_tau29_medium1_tau20_medium1_Hypo_00_03_02.xml src/bundle_2011/CoEPPTrigTool/share/triggers/TrigTauHypo_00_03_02/
-    cp patches/CoEPPTrigTool/EF_tau29T_medium1_tau20T_medium1_Hypo_00_03_02.xml src/bundle_2011/CoEPPTrigTool/share/triggers/TrigTauHypo_00_03_02/
+    cp patches/TauTriggerEmulation/EF_tau29_medium1_tau20_medium1_Hypo_00_02_35.xml $share/triggers/TrigTauHypo_00_02_35/
+    cp patches/TauTriggerEmulation/EF_tau29_medium1_tau20_medium1_Hypo_00_02_42.xml $share/triggers/TrigTauHypo_00_02_42/
+    cp patches/TauTriggerEmulation/EF_tau29_medium1_tau20_medium1_Hypo_00_03_02.xml $share/triggers/TrigTauHypo_00_03_02/
+    cp patches/TauTriggerEmulation/EF_tau29T_medium1_tau20T_medium1_Hypo_00_03_02.xml $share/triggers/TrigTauHypo_00_03_02/
 fi
 if [ -d src/bundle_2011/TauTriggerCorrections ]
 then
-    echo "patching TauTriggerCorrections..."
+    echo "patching TauTriggerCorrections ..."
     if [ -d src/bundle_2011/TauTriggerCorrections/root ]
     then
         mv src/bundle_2011/TauTriggerCorrections/root src/bundle_2011/TauTriggerCorrections/share
@@ -30,7 +31,7 @@ then
 fi
 if [ -d src/bundle_2012/TauFakeRates ]
 then
-    echo "patching TauFakeRates..."
+    echo "patching TauFakeRates ..."
     if [ -d src/bundle_2012/TauFakeRates/include ]
     then
         mv src/bundle_2012/TauFakeRates/include src/bundle_2012/TauFakeRates/TauFakeRates

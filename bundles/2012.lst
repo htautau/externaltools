@@ -6,7 +6,6 @@ GoodRunsLists
 PileupReweighting
 TrigRootAnalysis
 
-# new trigger emulation for 2012
 TauTriggerEmulation-00-00-00
 # latest 2012 tag
 TauTriggerCorrections-00-01-03

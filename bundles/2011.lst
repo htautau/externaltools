@@ -6,9 +6,7 @@ GoodRunsLists
 PileupReweighting
 TrigRootAnalysis
 
-CoEPPCore
-CoEPPD3PDReader
-CoEPPTrigTool
+TauTriggerEmulation-00-00-00
 # last 2011 tag
 TauTriggerCorrections-00-00-02
 TauFakeRates atlasphys/Physics/Higgs/HSG4/software/hadhad
