@@ -38,4 +38,20 @@ then
     fi
     cp patches/bundle_2012/TauFakeRates/LinkDef.h src/bundle_2012/TauFakeRates/TauFakeRates/
 fi
+if [ -d src/bundle_2012/TrigMuonEfficiency ]
+then
+    echo "patching TrigMuonEfficiency ..."
+    if [ -d src/bundle_2012/TrigMuonEfficiency/share ]
+    then
+	cp patches/bundle_2012/TrigMuonEfficiency/* src/bundle_2012/TrigMuonEfficiency/share/.
+    fi
+fi
+if [ -d src/common/MuonEfficiencyCorrections ]
+then
+    echo "patching MuonEfficiencyCorrections ..."
+    if [ -d src/common/MuonEfficiencyCorrections/Root ]
+    then
+        cp patches/MuonEfficiencyCorrections/LinkDef.h src/common/MuonEfficiencyCorrections/Root/.
+    fi
+fi
 echo "done"

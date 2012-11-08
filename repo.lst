@@ -14,6 +14,7 @@ atlasoff/Reconstruction/Jet/ApplyJetCalibration
 atlasperf/CombPerf/JetETMiss/JetCalibrationTools/ApplyJetResolutionSmearing
 atlasoff/PhysicsAnalysis/MuonID/MuonIDAnalysis/MuonMomentumCorrections
 atlasoff/PhysicsAnalysis/MuonID/MuonIDAnalysis/MuonEfficiencyCorrections
+atlasoff/PhysicsAnalysis/MuonID/MuonIDAnalysis/MuonIsolationCorrection
 atlasoff/Trigger/TrigAnalysis/TrigMuonEfficiency
 atlasoff/Reconstruction/egamma/egammaAnalysis/egammaAnalysisUtils
 atlasoff/Reconstruction/egamma/egammaEvent
