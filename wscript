@@ -68,9 +68,11 @@ def load_package(bundle, package, deps=None):
         load_package(dep_bundle, dep)
     
     if bundle == NAME:
-        lib_path = os.path.join(HERE, 'lib', 'lib%s.so' % package)
+        lib_path = os.path.join(
+            HERE, 'lib', 'lib%s_%s.so' % (package, bundle))
     else:
-        lib_path = os.path.join(HERE, bundle, 'lib', 'lib%s.so' % package)
+        lib_path = os.path.join(
+            HERE, bundle, 'lib', 'lib%s_%s.so' % (package, bundle))
 
     # ignore packages that didn't produce a library (headers only)
     if os.path.isfile(lib_path):
@@ -297,7 +299,7 @@ def build(bld):
             shlib = bld.shlib(
                     source=SOURCES,
                     dynamic_source=DICT_SRC,
-                    target=package.dot_versioned_name,
+                    target=package.dot_versioned_name + "_%s" % bundle,
                     #use=LIB_DEPENDS,
                     install_path=install_path)
             

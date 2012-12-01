@@ -22,6 +22,9 @@ build:
 install:
 	./waf install
 
+uninstall:
+	rm -rf $(PREFIX)
+
 test:
 	$(PYTHON) test.py
 
