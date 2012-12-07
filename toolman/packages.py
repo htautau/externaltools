@@ -60,6 +60,28 @@ for line in read_file(REPOS_FILE):
 
 class Package(object):
 
+    @classmethod
+    def from_string(cls, package, path=None):
+
+        match = re.match(PACKAGE_PATTERN, package)
+        if not match:
+            raise ValueError("Not a valid package name: %s" % package)
+        name = match.group('name')
+        if path is not None:
+            base_path = os.path.join(path, name)
+        else:
+            if name not in REPO:
+                raise ValueError('package %s not found in any listed repositories' %
+                        name)
+            base_path = REPO[name]
+        tag = None
+        if match.group('tag'):
+            path = os.path.normpath(os.path.join(base_path, 'tags', package))
+            tag = match.group('tag')
+        else: # assume trunk
+            path = os.path.join(base_path, 'trunk')
+        return Package(name=name, path=path, tag=tag)
+
     def __init__(self, name, path, tag=None):
 
         self.name = name
@@ -86,10 +108,7 @@ class Package(object):
 
     def __repr__(self):
 
-        if self.tag is not None:
-            return os.path.join(self.path, self.name + self.tag)
-        else:
-            return os.path.join(self.path, self.name)
+        return self.path
 
     def __hash__(self):
 
@@ -119,33 +138,13 @@ class Package(object):
         return cmp(self.version, other.version)
 
 
-def make_package(package, path=None):
-
-    match = re.match(PACKAGE_PATTERN, package)
-    if not match:
-        raise ValueError("Not a valid package name: %s" % package)
-    name = match.group('name')
-    if path is not None:
-        base_path = os.path.join(path, name)
-    else:
-        if name not in REPO:
-            raise ValueError('package %s not found in any listed repositories' %
-                    name)
-        base_path = REPO[name]
-    tag = None
-    if match.group('tag'):
-        path = os.path.join(base_path, 'tags', package)
-        tag = match.group('tag')
-    else: # assume trunk
-        path = os.path.join(base_path, 'trunk')
-    return Package(name=name, path=path, tag=tag)
 
 
 def read_packages(bundle):
 
     print "Reading packages in bundle %s ..." % bundle
     for line in read_file(os.path.join(BUNDLES_DIR, '%s.lst' % bundle)):
-        yield make_package(*line.split())
+        yield Package.from_string(*line.split())
 
 
 def list_bundles():
@@ -173,7 +172,7 @@ def list_tags(user, package):
                        REPO[package], 'tags')
     tags = subprocess.Popen(['svn', 'list', url],
             stdout=subprocess.PIPE).communicate()[0].strip().split()
-    tags = [make_package(tag) for tag in tags]
+    tags = [Package.from_string(tag) for tag in tags]
     return tags
 
 
