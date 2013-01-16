@@ -158,7 +158,7 @@ def configure(conf):
     
     conf.load('compiler_cxx')
     conf.env['CXXFLAGS'] = rootcore.root_cflags()[:]
-    conf.env.append_value('CXXFLAGS', ['-DROOTCORE'])
+    conf.env.append_value('CXXFLAGS', ['-DROOTCORE', '-g'])
     conf.env['LINKFLAGS'] = rootcore.root_linkerflags()[:]
     conf.env.append_value('LINKFLAGS', conf.env.CXXFLAGS)
     #conf.env['INCLUDES'] = rootcore.root_inc()[:]
