@@ -28,4 +28,7 @@ uninstall:
 test:
 	$(PYTHON) test.py
 
+clean-src:
+	rm -rf src
+
 .PHONY: patch
