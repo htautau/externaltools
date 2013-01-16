@@ -14,6 +14,7 @@ TauFakeRates atlasusr/morgens
 # tag 9 only to be used by lephad
 MissingMassCalculator-00-00-09
 TauDiscriminant
+TESUncertaintyProvider
 
 # https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/MissingETUtility
 MissingETUtility-01-01-03
