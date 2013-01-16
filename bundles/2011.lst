@@ -21,7 +21,8 @@ MissingETUtility-01-01-03
 # https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/JetUncertainties2011
 JetUncertainties-00-07-06
 # https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/JetEnergyResolutionProvider
-JetResolution-00-00-09
+#JetResolution-00-00-09
+JetResolution-01-00-01
 # https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/ApplyJetCalibration2011
 ApplyJetCalibration-00-02-07
 # https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/ApplyJetResolutionSmearing
