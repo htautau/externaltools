@@ -61,4 +61,8 @@ In a Python script::
 
    from externaltools import MissingETUtility
 
-etc...
+
+Other Packages
+==============
+
+https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/TauStandaloneTools
