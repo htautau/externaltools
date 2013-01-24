@@ -1,14 +1,5 @@
 #!/bin/bash
 
-#if [ -d src/common/JetUncertainties ]
-#then
-#    echo "patching JetUncertainties..."
-#    if [ ! -d src/common/JetUncertainties/share/analysisPlots ]
-#    then
-#        cp -r src/common/JetUncertainties/analysisPlots src/common/JetUncertainties/share/analysisPlots
-#    fi
-#    cp patches/JetUncertainties/*.config src/common/JetUncertainties/share/
-#fi
 if [ -d src/common/TauTriggerEmulation ]
 then
     echo "patching TauTriggerEmulation ..."
@@ -21,6 +12,7 @@ then
     cp patches/TauTriggerEmulation/EF_tau29_medium1_tau20_medium1_Hypo_00_03_02.xml $share/triggers/TrigTauHypo_00_03_02/
     cp patches/TauTriggerEmulation/EF_tau29T_medium1_tau20T_medium1_Hypo_00_03_02.xml $share/triggers/TrigTauHypo_00_03_02/
 fi
+
 if [ -d src/bundle_2011/TauTriggerCorrections ]
 then
     echo "patching TauTriggerCorrections ..."
@@ -29,37 +21,27 @@ then
         mv src/bundle_2011/TauTriggerCorrections/root src/bundle_2011/TauTriggerCorrections/share
     fi
 fi
-#if [ -d src/bundle_2012/TauFakeRates ]
-#then
-#    echo "patching TauFakeRates ..."
-#    if [ -d src/bundle_2012/TauFakeRates/include ]
-#    then
-#        mv src/bundle_2012/TauFakeRates/include src/bundle_2012/TauFakeRates/TauFakeRates
-#    fi
-#    cp patches/bundle_2012/TauFakeRates/LinkDef.h src/bundle_2012/TauFakeRates/TauFakeRates/
-#fi
+
+if [ -d src/bundle_2012/TauFakeRates ]
+then
+    echo "patching TauFakeRates ..."
+    sed -i 's/TRoot/TROOT/g' src/bundle_2012/TauFakeRates/Root/Helper.cxx
+fi
+
 if [ -d src/bundle_2012/TrigMuonEfficiency ]
 then
     echo "patching TrigMuonEfficiency ..."
-    if [ -d src/bundle_2012/TrigMuonEfficiency/share ]
-    then
 	cp patches/bundle_2012/TrigMuonEfficiency/* src/bundle_2012/TrigMuonEfficiency/share/.
-    fi
 fi
+
 if [ -d src/common/MuonEfficiencyCorrections ]
 then
     echo "patching MuonEfficiencyCorrections ..."
-    if [ -d src/common/MuonEfficiencyCorrections/Root ]
-    then
-        cp patches/MuonEfficiencyCorrections/LinkDef.h src/common/MuonEfficiencyCorrections/Root/.
-    fi
+    cp patches/MuonEfficiencyCorrections/LinkDef.h src/common/MuonEfficiencyCorrections/Root/.
 fi
+
 if [ -d src/common/MissingETUtility ]
 then
     echo "patching MissingETUtility ..."
-    if [ -d src/common/MissingETUtility/Root ]
-    then
-        cp patches/MissingETUtility/LinkDef.h src/common/MissingETUtility/Root/.
-    fi
+    cp patches/MissingETUtility/LinkDef.h src/common/MissingETUtility/Root/.
 fi
-echo "done"
