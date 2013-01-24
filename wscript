@@ -369,13 +369,16 @@ def build_python_package(bld):
             share_data = join(toolman.packages.PACKAGE_PATH, bundle, package.name, 'share')
             data_data = join(toolman.packages.PACKAGE_PATH, bundle, package.name, 'data')
             data = None
+            
             if os.path.exists(share_data) and os.path.exists(data_data):
-                Logs.error("Both share/ and data/ exist for package %s!" %
-                        package)
+                Logs.warn("Both share/ and data/ exist for package %s! "
+                          "Using data/" % package)
+            
+            if os.path.exists(data_data):
+                data = data_data
             elif os.path.exists(share_data):
                 data = share_data
-            elif os.path.exists(data_data):
-                data = data_data
+            
             if data is not None:
                 Logs.info("Copying data for package %s ..." % package)
                 dest = join(base_package, 'share')
