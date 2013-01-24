@@ -54,4 +54,12 @@ then
         cp patches/MuonEfficiencyCorrections/LinkDef.h src/common/MuonEfficiencyCorrections/Root/.
     fi
 fi
+if [ -d src/common/MissingETUtility ]
+then
+    echo "patching MissingETUtility ..."
+    if [ -d src/common/MissingETUtility/Root ]
+    then
+        cp patches/MissingETUtility/LinkDef.h src/common/MissingETUtility/Root/.
+    fi
+fi
 echo "done"

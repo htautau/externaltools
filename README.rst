@@ -44,7 +44,7 @@ errors::
 
    ./test
 
-You should see no errors.
+You should see no errors. *TODO: update the test script.*
 
 
 Using the Packages
@@ -62,7 +62,12 @@ In a Python script::
    from externaltools import MissingETUtility
 
 
-Other Packages
-==============
+TODO
+====
 
-https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/TauStandaloneTools
+* Upgrade MissingEtUtility once a tag is created with the TESUncertaintyProvider
+  removed.
+
+* Merge the TESUncertaintyProvider and TauCorrections packages into one
+  TauUncertainties package
+  https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/TauStandaloneTools

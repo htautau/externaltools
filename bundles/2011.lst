@@ -3,7 +3,7 @@
 # blank lines and lines beginning with # are ignored
 
 GoodRunsLists
-PileupReweighting
+PileupReweighting-00-02-09
 TrigRootAnalysis
 
 TauTriggerEmulation
@@ -16,17 +16,11 @@ MissingMassCalculator-00-00-07
 TauDiscriminant
 TESUncertaintyProvider
 
-# https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/MissingETUtility
 MissingETUtility-01-01-03
-# https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/JetCalibrationToolsForPhysicsAnalyses
-# https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/JetUncertainties2011
 JetUncertainties-00-07-06
-# https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/JetEnergyResolutionProvider
 #JetResolution-00-00-09
 JetResolution-01-00-01
-# https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/ApplyJetCalibration2011
 ApplyJetCalibration-00-02-07
-# https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/ApplyJetResolutionSmearing
 ApplyJetResolutionSmearing-00-00-03
 
 MuonMomentumCorrections-00-06-08

@@ -206,6 +206,7 @@ def show_updates(user, bundle):
                 continue
             newer_packages = tags[tags.index(package) + 1:]
             if newer_packages:
+                print
                 if len(newer_packages) == 1:
                     print "A newer tag of package %s is available:" % (
                         package.name)
@@ -213,9 +214,9 @@ def show_updates(user, bundle):
                     print "Newer tags of package %s are available:" % (
                         package.name)
                 for p in newer_packages:
-                    print p
-                print "You are using %s" % package
-                print
+                    print p.tag
+                print "You are using %s" % package.tag
+    print
 
 
 def get_partitioning():
