@@ -1,8 +1,10 @@
-#ifndef FAKERATESCALER_LINKDEF_H
-#define FAKERATESCALER_LINKDEF_H
+#ifndef FAKERATESCALER_LINKEDEF_H
+#define FAKERATESCALER_LINKEDEF_H
 
-// Local include(s):
-#include "TauFakeRates/FakeRateScaler.h"
+#include <vector>
+#include <string>
+#include "TString.h"
+#include "FakeRateScaler.h"
 
 #ifdef __CINT__
 
@@ -10,8 +12,7 @@
 #pragma link off all classes;
 #pragma link off all functions;
 
-// Dictionaries for the classes implemented in this library:
-#pragma link C++ class TauFakeRates::FakeRateScaler;
+#pragma link C++ class TauFakeRates::FakeRateScaler+ ;
+#endif
 
-#endif // __CINT__
-#endif // FAKERATESCALER_LINKDEF_H
+#endif
