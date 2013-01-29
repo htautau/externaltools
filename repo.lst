@@ -8,6 +8,7 @@ atlasoff/PhysicsAnalysis/AnalysisCommon/PileupReweighting
 atlasoff/Trigger/TrigAnalysis/TrigRootAnalysis
 
 # https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/MissingETUtility
+# https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/METUtilUserGuide
 atlasoff/Reconstruction/MissingETUtility
 
 # https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/JetCalibrationToolsForPhysicsAnalyses

@@ -20,6 +20,7 @@
 #pragma link C++ class PhysicsObject+ ;
 #pragma link C++ class METObject+ ;
 #pragma link C++ class METUtility+ ;
+#pragma link C++ class MissingETTags+ ;
 
 #endif
 
