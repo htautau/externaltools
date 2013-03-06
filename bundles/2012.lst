@@ -19,7 +19,7 @@ TESUncertaintyProvider
 MissingETUtility-01-01-03
 JetUncertainties-00-08-02
 JetResolution-01-00-01
-ApplyJetCalibration-00-03-02
+ApplyJetCalibration-00-03-03
 ApplyJetResolutionSmearing-00-00-03
 
 MuonMomentumCorrections-00-06-08
