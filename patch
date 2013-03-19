@@ -22,13 +22,6 @@ then
     fi
 fi
 
-if [ -d src/bundle_2012/TauFakeRates ]
-then
-    echo "patching TauFakeRates ..."
-    sed -i 's/TRoot/TROOT/g' src/bundle_2012/TauFakeRates/Root/Helper.cxx
-    cp patches/bundle_2012/TauFakeRates/LinkDef.h src/bundle_2012/TauFakeRates/TauFakeRates/.
-fi
-
 if [ -d src/bundle_2012/TrigMuonEfficiency ]
 then
     echo "patching TrigMuonEfficiency ..."

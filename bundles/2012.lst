@@ -9,7 +9,7 @@ TrigRootAnalysis
 TauTriggerEmulation
 # latest 2012 tag
 TauTriggerCorrections-00-01-03
-TauFakeRates atlasusr/morgens
+TauFakeRates-12-00-05 atlasusr/morgens
 #TauFakeRates2012
 # tag 9 only to be used by lephad
 MissingMassCalculator-00-00-09
