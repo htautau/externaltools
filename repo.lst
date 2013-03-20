@@ -43,6 +43,8 @@ atlasoff/Reconstruction/egamma/egammaEvent
 atlasphys/Physics/Higgs/HSG4/software/hadhad/TauFakeRates
 #atlasphys/Physics/Higgs/HSG4/software/hadhad/TauFakeRates2012
 
+atlasoff/PhysicsAnalysis/TauID/TauCorrUncert
+
 atlasusr/morgens/TauFakeRates
 atlasusr/mbecking/HSG4TriggerSF
 atlasusr/ruthmann/TESUncertaintyProvider
