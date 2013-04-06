@@ -2,6 +2,8 @@
 # package name with no tag assumes trunk
 # blank lines and lines beginning with # are ignored
 
+PATCore-00-00-09
+
 GoodRunsLists
 PileupReweighting-00-02-09
 TrigRootAnalysis
@@ -33,3 +35,5 @@ egammaAnalysisUtils-00-03-55
 ggFReweighting-00-00-10
 
 HSG4TriggerSF-00-00-04
+
+TileTripReader-00-00-07

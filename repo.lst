@@ -1,3 +1,6 @@
+# https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/StandardSelectorTools
+atlasoff/PhysicsAnalysis/AnalysisCommon/PATCore
+
 # https://twiki.cern.ch/twiki/bin/viewauth/Atlas/GoodRunsLists
 atlasoff/DataQuality/GoodRunsLists
 
@@ -42,6 +45,9 @@ atlasoff/Reconstruction/egamma/egammaEvent
 
 atlasphys/Physics/Higgs/HSG4/software/hadhad/TauFakeRates
 #atlasphys/Physics/Higgs/HSG4/software/hadhad/TauFakeRates2012
+
+# https://twiki.cern.ch/twiki/bin/viewauth/Atlas/TileTripReader
+atlasoff/PhysicsAnalysis/TileID/TileTripReader
 
 atlasoff/PhysicsAnalysis/TauID/TauCorrUncert
 
