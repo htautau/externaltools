@@ -2,8 +2,6 @@
 # package name with no tag assumes trunk
 # blank lines and lines beginning with # are ignored
 
-PATCore-00-00-09
-
 GoodRunsLists
 PileupReweighting-00-02-09
 TrigRootAnalysis

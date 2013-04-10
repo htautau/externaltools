@@ -139,6 +139,7 @@ echo "sourcing ${EXTERNALTOOLS_SETUP}..."
 export PYTHONPATH=${EXTERNALTOOLS_DIR}${PYTHONPATH:+:$PYTHONPATH}
 """
 
+SPECIAL = ['TileTripReader']
 
 def options(opt):
 
@@ -158,7 +159,7 @@ def configure(conf):
     
     conf.load('compiler_cxx')
     conf.env['CXXFLAGS'] = rootcore.root_cflags()[:]
-    conf.env.append_value('CXXFLAGS', ['-DROOTCORE', '-g'])
+    conf.env.append_value('CXXFLAGS', '-g')
     conf.env['LINKFLAGS'] = rootcore.root_linkerflags()[:]
     conf.env.append_value('LINKFLAGS', conf.env.CXXFLAGS)
     #conf.env['INCLUDES'] = rootcore.root_inc()[:]
@@ -223,7 +224,7 @@ def build(bld):
                 SOURCES = bld.path.ant_glob(join(PATH, 'Root', '*.cxx'))
                 HEADERS = bld.path.ant_glob(join(PATH, name, '*.h'))
                 # check for dependencies on other packages
-                if 'PACKAGE_DEP' in make:
+                if 'PACKAGE_DEP' in make and package.name not in SPECIAL:
                     DEPS = make['PACKAGE_DEP'].split()
                     for DEP in DEPS:
                         # search for DEP in this bundle
@@ -289,6 +290,10 @@ def build(bld):
                         ' '.join(['-I../%s' % inc for inc in INCLUDES]))
                 if make is not None:
                     rootcore.define_env(rbld.env, make)
+                if package.name not in SPECIAL:
+                    rbld.env.append_value('CXXFLAGS', '-DROOTCORE')
+                else:
+                    rbld.env.append_value('CXXFLAGS', '-D__STANDALONE__')
             
             bld.set_group('libs_%s' % bundle)
             if bundle == 'common':
@@ -308,6 +313,10 @@ def build(bld):
             
             shlib.env.append_value('INCLUDES', INCLUDES)
             shlib.env.append_value('LINKFLAGS', LINKFLAGS)
+            if package.name not in SPECIAL:
+                shlib.env.append_value('CXXFLAGS', '-DROOTCORE')
+            else:
+                shlib.env.append_value('CXXFLAGS', '-D__STANDALONE__')
             shlib.env.append_value('LINKFLAGS', shlib.env.CXXFLAGS)
 
 
