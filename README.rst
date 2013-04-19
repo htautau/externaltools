@@ -3,9 +3,11 @@
 About
 =====
 
-"externaltools" is a package for easily checking out and building all of the
-"external" tools we use (MissingMassCalculator, PileupReweighting,
-TauTriggerCorrections, etc.)
+``externaltools`` is a RootCore alternative that uses the
+`waf build system <https://code.google.com/p/waf/>`_.
+
+``externaltools`` also makes it easier to manage bundles of packages and builds
+a Python package under which each tool is a subpackage.
 
 Each bundle in bundles/ contains a list of the packages and the format of each
 line is as follows::
@@ -30,6 +32,10 @@ This adds configs to packages and fixes errors not yet fixed by the developers.
 To build and install all packages (in ./externaltools/lib)::
 
    ./waf configure build install
+
+To patch, build and install::
+
+    make
 
 To clean::
 
@@ -60,14 +66,3 @@ externaltools to the PYTHONPATH.
 In a Python script::
 
    from externaltools import MissingETUtility
-
-
-TODO
-====
-
-* Upgrade MissingEtUtility once a tag is created with the TESUncertaintyProvider
-  removed.
-
-* Merge the TESUncertaintyProvider and TauCorrections packages into one
-  TauUncertainties package
-  https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/TauStandaloneTools
