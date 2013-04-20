@@ -51,6 +51,10 @@ atlasoff/PhysicsAnalysis/TileID/TileTripReader
 
 atlasoff/PhysicsAnalysis/TauID/TauCorrUncert
 
+# https://twiki.cern.ch/twiki/bin/viewauth/Atlas/TapmTau
+atlasoff/Trigger/TrigAnalysis/TrigTauAnalysis/TrigTauEfficiency
+atlasoff/Trigger/TrigAnalysis/TrigTauAnalysis/TrigTauEmulation
+
 atlasusr/morgens/TauFakeRates
 atlasusr/mbecking/HSG4TriggerSF
 atlasusr/ruthmann/TESUncertaintyProvider
