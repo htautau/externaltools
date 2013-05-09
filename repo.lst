@@ -63,3 +63,6 @@ atlasusr/wdavey/CoEPPD3PDReader
 atlasusr/wdavey/CoEPPTrigTool
 atlasusr/wdavey/TauTriggerCorrections
 atlasusr/wdavey/TauTriggerEmulation
+
+# VBF filtering
+atlasphys/Physics/Higgs/HSG4/software/common/VBFFilterOLR
