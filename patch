@@ -28,6 +28,12 @@ then
 	cp patches/bundle_2012/TrigMuonEfficiency/* src/bundle_2012/TrigMuonEfficiency/share/.
 fi
 
+if [ -d src/bundle_2012/JVFUncertaintyTool ]
+then
+    echo "patching JVFUncertaintyTool ..."
+	cp patches/bundle_2012/JVFUncertaintyTool/* src/bundle_2012/JVFUncertaintyTool/Root/.
+fi
+
 if [ -d src/common/MuonEfficiencyCorrections ]
 then
     echo "patching MuonEfficiencyCorrections ..."

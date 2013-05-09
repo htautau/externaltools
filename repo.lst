@@ -18,6 +18,7 @@ atlasoff/Reconstruction/MissingETUtility
 # https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/JetUncertainties2011
 # https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/JetUncertainties2012
 atlasoff/Reconstruction/Jet/JetUncertainties
+atlasoff/Reconstruction/Jet/JetAnalysisTools/JVFUncertaintyTool
 
 # https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/JetEnergyResolutionProvider
 atlasoff/Reconstruction/Jet/JetResolution
