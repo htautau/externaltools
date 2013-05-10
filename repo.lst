@@ -69,3 +69,6 @@ atlasusr/wdavey/TauTriggerEmulation
 
 # VBF filtering
 atlasphys/Physics/Higgs/HSG4/software/common/VBFFilterOLR
+
+# track fitting
+atlasphys/Physics/Higgs/HSG4/software/hadhad/TrackFit
