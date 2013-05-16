@@ -8,7 +8,7 @@ TrigRootAnalysis
 
 TauTriggerEmulation
 # new trigger efficiency tool
-TrigTauEfficiency
+TrigTauEfficiency-00-00-03
 # latest 2012 tag
 TauTriggerCorrections-00-01-03
 TauFakeRates-12-00-07 atlasusr/morgens
