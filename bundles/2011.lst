@@ -11,8 +11,7 @@ TauTriggerEmulation
 TauTriggerCorrections-00-00-02
 TauFakeRates atlasphys/Physics/Higgs/HSG4/software/hadhad
 #TauFakeRates2012
-# lephad should use tag 9 for 2011 and 2012
-MissingMassCalculator-00-00-07-01
+MissingMassCalculator-00-00-15
 TauDiscriminant
 TESUncertaintyProvider
 

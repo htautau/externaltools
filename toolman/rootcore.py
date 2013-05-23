@@ -55,6 +55,9 @@ def read_makefile(makefile):
         try:
             name, value = line.split('=')
             name = name.strip()
+            if '#' in value:
+                # ignore inline comments
+                value = value[:value.index('#')]
             value = value.strip()
             if value == '':
                 continue
