@@ -74,3 +74,12 @@ atlasphys/Physics/Higgs/HSG4/software/common/VBFFilterOLR
 
 # track fitting
 atlasphys/Physics/Higgs/HSG4/software/hadhad/TrackFit
+
+# https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/HiggsToTauTauEmbeddedCorrections2013
+atlasusr/lhelary/EmbeddedCorrections
+
+# HSG4LepLepTriggerSF
+atlasusr/dellasta/HSG4LepLepTriggerSF
+
+# https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/TElectronEfficiencyCorrectionTool
+atlasoff/PhysicsAnalysis/ElectronPhotonID/ElectronEfficiencyCorrection

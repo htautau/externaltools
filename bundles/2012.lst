@@ -2,6 +2,8 @@
 # package name with no tag assumes trunk
 # blank lines and lines beginning with # are ignored
 
+PATCore-00-00-10
+
 GoodRunsLists
 PileupReweighting-00-02-09
 TrigRootAnalysis
@@ -24,10 +26,11 @@ JetResolution-01-00-01
 ApplyJetCalibration-00-03-03
 ApplyJetResolutionSmearing-00-00-03
 
+ElectronEfficiencyCorrection-00-00-17
 MuonMomentumCorrections-00-06-08
-MuonEfficiencyCorrections-02-01-03
+MuonEfficiencyCorrections-02-01-11
 MuonIsolationCorrection-01-01
-TrigMuonEfficiency-00-02-17
+TrigMuonEfficiency-00-02-30
 
 egammaEvent
 egammaAnalysisUtils-00-03-55
@@ -41,3 +44,6 @@ TileTripReader-00-00-07
 VBFFilterOLR-00-00-01
 
 TrackFit
+
+HSG4LepLepTriggerSF-00-06-01
+EmbeddedCorrections
