@@ -17,13 +17,15 @@ NAME = 'common'
 def register_loaded(bundle, package):
 
     # check if this package was already loaded in another non-common bundle
+    package_name = package.split('.')[0]
     for other_bundle, libs in LOADED_PACKAGES.items():
         if other_bundle in (bundle, NAME):
             continue
-        if package in libs:
-            raise RuntimeError(
-                'Attempted to load the same package (%s) from two bundles' %
-                package)
+        for loaded_package in libs:
+            if package_name == loaded_package.split('.')[0]:
+                raise RuntimeError(
+                    'Attempted to load the same package (%s) from two bundles' %
+                    package_name)
     if bundle not in LOADED_PACKAGES:
         LOADED_PACKAGES[bundle] = []
     if package not in LOADED_PACKAGES[bundle]:
@@ -61,7 +63,7 @@ def load_package(bundle, package, deps=None):
 
     # ignore packages that didn't produce a library (headers only)
     if os.path.isfile(lib_path):
-        if not register_loaded(bundle, package_name):
+        if not register_loaded(bundle, package):
             log.info("loading %s/%s ..." %
                      (bundle, os.path.basename(lib_path)))
             ROOT.gSystem.Load(lib_path)
@@ -71,6 +73,5 @@ def report():
 
     log.info("Loaded packages:")
     for bundle, packages in LOADED_PACKAGES.items():
-        log.info(bundle)
         for package in packages:
             log.info(package)
