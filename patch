@@ -53,3 +53,12 @@ then
     cp src/bundle_2012/EmbeddedCorrections/ToBeModified/LeptonTriggerSF.cxx src/common/TrigMuonEfficiency/Root/.
     cp src/bundle_2012/EmbeddedCorrections/ToBeModified/LeptonTriggerSF.h src/common/TrigMuonEfficiency/TrigMuonEfficiency/.
 fi
+
+if [ -d src/bundle_2012/TauCorrUncert ]
+then
+    echo "patching TauCorrUncert to enable TES splitting ..."
+    echo "WARNING: This patch makes the default non-TES-split ROOT input files unusable!"
+    cp patches/bundle_2012/TauCorrUncert/TESUncertainty.cxx src/bundle_2012/TauCorrUncert/Root/.
+    cp patches/bundle_2012/TauCorrUncert/mc12_p1344_medium_split.root src/bundle_2012/TauCorrUncert/share/TES/.
+fi
+
