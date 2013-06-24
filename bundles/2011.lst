@@ -4,9 +4,9 @@
 
 PATCore-00-00-10
 
-GoodRunsLists
+GoodRunsLists-00-01-04
 PileupReweighting-00-02-09
-TrigRootAnalysis
+TrigRootAnalysis-00-01-05
 
 TauTriggerEmulation
 # last 2011 tag
@@ -29,7 +29,7 @@ MuonMomentumCorrections-00-06-08
 MuonEfficiencyCorrections-02-01-11
 TrigMuonEfficiency-00-02-30
 
-egammaEvent
+egammaEvent-03-06-42
 egammaAnalysisUtils-00-03-55
 
 ggFReweighting-00-00-10

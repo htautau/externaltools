@@ -76,7 +76,7 @@ atlasphys/Physics/Higgs/HSG4/software/common/VBFFilterOLR
 atlasphys/Physics/Higgs/HSG4/software/hadhad/TrackFit
 
 # https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/HiggsToTauTauEmbeddedCorrections2013
-atlasusr/lhelary/EmbeddedCorrections
+atlasphys/Physics/Higgs/HSG4/software/embedding/EmbeddedCorrections
 
 # HSG4LepLepTriggerSF
 atlasusr/dellasta/HSG4LepLepTriggerSF

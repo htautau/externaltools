@@ -4,9 +4,9 @@
 
 PATCore-00-00-10
 
-GoodRunsLists
+GoodRunsLists-00-01-04
 PileupReweighting-00-02-09
-TrigRootAnalysis
+TrigRootAnalysis-00-01-05
 
 TauTriggerEmulation
 # new trigger efficiency tool
@@ -17,7 +17,7 @@ TauFakeRates-12-00-07 atlasusr/morgens
 #TauFakeRates2012
 MissingMassCalculator-00-00-15
 TauDiscriminant
-TauCorrUncert
+TauCorrUncert-00-00-07
 
 MissingETUtility-01-02-02
 JetUncertainties-00-08-06
@@ -32,7 +32,7 @@ MuonEfficiencyCorrections-02-01-11
 MuonIsolationCorrection-01-01
 TrigMuonEfficiency-00-02-30
 
-egammaEvent
+egammaEvent-03-06-42
 egammaAnalysisUtils-00-03-55
 
 ggFReweighting-00-00-10
@@ -46,4 +46,6 @@ VBFFilterOLR-00-00-01
 TrackFit
 
 HSG4LepLepTriggerSF-00-06-01
+
+# tag 00-00-01 not found?
 EmbeddedCorrections
