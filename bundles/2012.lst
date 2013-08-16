@@ -30,7 +30,7 @@ ElectronEfficiencyCorrection-00-00-17
 MuonMomentumCorrections-00-06-08
 MuonEfficiencyCorrections-02-01-11
 MuonIsolationCorrection-01-01
-TrigMuonEfficiency-00-02-30
+TrigMuonEfficiency-00-02-37
 
 egammaEvent-03-06-42
 egammaAnalysisUtils-00-03-55
@@ -47,5 +47,4 @@ TrackFit
 
 HSG4LepLepTriggerSF-00-06-01
 
-# tag 00-00-01 not found?
-EmbeddedCorrections
+EmbeddedCorrections-00-00-04
