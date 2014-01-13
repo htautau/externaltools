@@ -15,7 +15,7 @@ TauFakeRates atlasphys/Physics/Higgs/HSG4/software/hadhad
 #TauFakeRates2012
 MissingMassCalculator-00-00-15-03
 TauDiscriminant
-TESUncertaintyProvider
+TauCorrUncert-00-00-12
 
 MissingETUtility-01-02-02
 JetUncertainties-00-08-06
@@ -33,9 +33,5 @@ egammaEvent-03-06-42
 egammaAnalysisUtils-00-03-55
 
 ggFReweighting-00-00-10
-
 HSG4TriggerSF-00-00-04
-
 VBFFilterOLR-00-00-03
-
-TrackFit

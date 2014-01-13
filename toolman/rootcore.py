@@ -46,7 +46,6 @@ MAKEFILE = 'Makefile.RootCore'
 
 
 def read_makefile(makefile):
-
     make = {}
     for i, line in enumerate(open(makefile).readlines()):
         line = line.strip()
@@ -70,7 +69,6 @@ def read_makefile(makefile):
 
 
 def define_env(env, make):
-
     if 'PACKAGE_CXXFLAGS' in make:
         env.append_value('CXXFLAGS', make['PACKAGE_CXXFLAGS'].split())
     if 'PACKAGE_LDFLAGS' in make:
@@ -85,37 +83,37 @@ def define_env(env, make):
 @memoized
 def root_inc():
     return subprocess.Popen(
-            ['root-config', '--incdir'],
-            stdout=subprocess.PIPE).communicate()[0].strip().split()
+        ['root-config', '--incdir'],
+        stdout=subprocess.PIPE).communicate()[0].strip().split()
 
 
 @memoized
 def root_linkerflags():
     return (subprocess.Popen(
-            ['root-config', '--libs', '--ldflags'],
-            stdout=subprocess.PIPE).communicate()[0].strip().split() +
-            ['-lXMLParser'])
+        ['root-config', '--libs', '--ldflags'],
+        stdout=subprocess.PIPE).communicate()[0].strip().split() +
+        ['-lXMLParser'])
 
 
 @memoized
 def root_cflags():
     return subprocess.Popen(
-            ['root-config', '--cflags'],
-            stdout=subprocess.PIPE).communicate()[0].strip().split()
+        ['root-config', '--cflags'],
+        stdout=subprocess.PIPE).communicate()[0].strip().split()
 
 
 @memoized
 def root_exec():
     return subprocess.Popen(
-            ['root-config', '--exec-prefix'],
-            stdout=subprocess.PIPE).communicate()[0].strip()
+        ['root-config', '--exec-prefix'],
+        stdout=subprocess.PIPE).communicate()[0].strip()
 
 
 @memoized
 def root_libdir():
     return subprocess.Popen(
-            ['root-config', '--libdir'],
-            stdout=subprocess.PIPE).communicate()[0].strip()
+        ['root-config', '--libdir'],
+        stdout=subprocess.PIPE).communicate()[0].strip()
 
 
 def find_linkdef(base='.'):
@@ -127,7 +125,6 @@ def find_linkdef(base='.'):
 
 
 def is_rootcore(bundle, name):
-
     path = os.path.join(packages.PACKAGE_PATH, bundle, name)
     return (os.path.isdir(os.path.join(path, 'Root')) and
             os.path.isdir(os.path.join(path, name)) and

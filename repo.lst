@@ -62,18 +62,11 @@ atlasoff/Trigger/TrigAnalysis/TrigTauAnalysis/TrigTauEmulation
 
 atlasusr/morgens/TauFakeRates
 atlasusr/mbecking/HSG4TriggerSF
-atlasusr/ruthmann/TESUncertaintyProvider
-atlasusr/wdavey/CoEPPCore
-atlasusr/wdavey/CoEPPD3PDReader
-atlasusr/wdavey/CoEPPTrigTool
 atlasusr/wdavey/TauTriggerCorrections
 atlasusr/wdavey/TauTriggerEmulation
 
 # VBF filtering
 atlasphys/Physics/Higgs/HSG4/software/common/VBFFilterOLR
-
-# track fitting
-atlasphys/Physics/Higgs/HSG4/software/hadhad/TrackFit
 
 # https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/HiggsToTauTauEmbeddedCorrections2013
 atlasphys/Physics/Higgs/HSG4/software/embedding/EmbeddedCorrections
