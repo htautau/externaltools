@@ -97,6 +97,11 @@ class Package(object):
         self.base = base
         self.name = name
         self.tag = tag
+        path_tokens = base.split(os.path.sep)
+        self.repo = path_tokens[0]
+        self.repo_path = os.path.join(*path_tokens[1:])
+        self.web_url = 'https://svnweb.cern.ch/trac/{0}/browser/{1}/{2}'.format(
+            self.repo, self.repo_path, name)
         if tag is not None:
             match = re.match(TAG_PATTERN, tag)
             if not match:
@@ -209,6 +214,7 @@ def show_updates(user, bundle):
                 else:
                     print "Newer tags of package %s are available:" % (
                         package.name)
+                print package.web_url
                 for p in newer_packages:
                     print p.tag
                 print "You are using %s" % package.tag
