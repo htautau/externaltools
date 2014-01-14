@@ -4,6 +4,7 @@ import re
 import shutil
 import subprocess
 import operator
+import fileinput
 
 
 PACKAGE_PATTERN = re.compile(
@@ -36,14 +37,28 @@ if not os.path.exists(PACKAGE_PATH):
 
 
 def read_file(name):
-    for i, line in enumerate(open(name).readlines()):
+    base_path = os.path.dirname(name)
+    file_stack = [fileinput.FileInput(name)]
+    while file_stack:
+        fp = file_stack[-1]
+        line = fp.readline()
+        if not line: # end of file
+            file_stack[-1].close()
+            file_stack.pop(-1)
         line = line.strip()
         if not line or line.startswith('#'):
             continue
-        try:
-            yield line
-        except:
-            print "line %i not understood: %s" % (i + 1, line)
+        # include files
+        tokens = line.split()
+        if len(tokens) == 2 and tokens[0] == 'include':
+            file_stack.append(
+                fileinput.FileInput(os.path.join(base_path, tokens[1])))
+        else:
+            try:
+                yield line
+            except:
+                print "line {0:d} of file {1} not understood: {2}".format(
+                    i + 1, fp.filename(), fp.lineno())
 
 REPO = {}
 for line in read_file(REPOS_FILE):

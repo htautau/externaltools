@@ -1,37 +1,9 @@
 # first add path to package in repo.lst
 # package name with no tag assumes trunk
 # blank lines and lines beginning with # are ignored
-
-PATCore-00-00-10
-
-GoodRunsLists-00-01-04
-PileupReweighting-00-02-09
-TrigRootAnalysis-00-01-05
-
+include common.lst
 TauTriggerEmulation
 # last 2011 tag
 TauTriggerCorrections-00-00-02
 TauFakeRates atlasphys/Physics/Higgs/HSG4/software/hadhad
 #TauFakeRates2012
-MissingMassCalculator-00-00-15-03
-TauDiscriminant
-TauCorrUncert-00-00-12
-
-MissingETUtility-01-02-02
-JetUncertainties-00-08-06
-#JetResolution-00-00-09
-JetResolution-01-00-01
-ApplyJetCalibration-00-03-03
-ApplyJetResolutionSmearing-00-00-03
-
-ElectronEfficiencyCorrection-00-00-17
-MuonMomentumCorrections-00-06-08
-MuonEfficiencyCorrections-02-01-11
-TrigMuonEfficiency-00-02-37
-
-egammaEvent-03-06-42
-egammaAnalysisUtils-00-03-55
-
-ggFReweighting-00-00-10
-HSG4TriggerSF-00-00-04
-VBFFilterOLR-00-00-03
