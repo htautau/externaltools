@@ -22,24 +22,11 @@ Getting and Building the External Tools
 
 To checkout all packages (supply your CERN username)::
 
-   ./fetch -u username
+   ./repo fetch -u username 2011 2012
 
-Apply the patches with::
+Then build everything::
 
-   ./patch
-
-This adds configs to packages and fixes errors not yet fixed by the developers.
-To build and install all packages (in ./externaltools/lib)::
-
-   ./waf configure build install
-
-To patch, build and install::
-
-    make
-
-To clean::
-
-   ./waf clean
+   make
 
 
 Testing the Built Packages
