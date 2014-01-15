@@ -221,7 +221,7 @@ def show_updates(user, bundle):
     print
 
 
-def get_partitioning(bundles):
+def get_partitioning(bundles=None):
     """
     determine packages in common between bundles
     and for each package in the common packages that depends on a package that
@@ -231,6 +231,8 @@ def get_partitioning(bundles):
     Return a dict mapping bundle names and 'common' (no bundle can be named
     'common') to packages.
     """
+    if bundles is None:
+        bundles = list_bundles()
     partitioning = {}
     for bundle in bundles:
         bundle_packages = set()

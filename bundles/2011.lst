@@ -2,7 +2,6 @@
 # package name with no tag assumes trunk
 # blank lines and lines beginning with # are ignored
 include common.lst
-TauTriggerEmulation
 # last 2011 tag
 TauTriggerCorrections-00-00-02
 TauFakeRates atlasphys/Physics/Higgs/HSG4/software/hadhad
