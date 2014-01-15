@@ -58,7 +58,7 @@ def read_file(name):
                 yield line
             except:
                 print "line {0:d} of file {1} not understood: {2}".format(
-                    i + 1, fp.filename(), fp.lineno())
+                    fp.lineno(), fp.filename(), line)
 
 REPO = {}
 for line in read_file(REPOS_FILE):
@@ -221,7 +221,7 @@ def show_updates(user, bundle):
     print
 
 
-def get_partitioning():
+def get_partitioning(bundles):
     """
     determine packages in common between bundles
     and for each package in the common packages that depends on a package that
@@ -232,9 +232,7 @@ def get_partitioning():
     'common') to packages.
     """
     partitioning = {}
-    for bundle in list_bundles():
-        if bundle == 'common':
-            raise NameError("A bundle has an illegal name: common")
+    for bundle in bundles:
         bundle_packages = set()
         for package in read_packages(bundle):
             for other_package in bundle_packages:
@@ -256,9 +254,9 @@ def get_partitioning():
     return partitioning
 
 
-def fetch(user):
+def fetch(user, bundles):
     svnbase = SVNBASE.format(**locals())
-    partitioning = get_partitioning()
+    partitioning = get_partitioning(bundles)
     for bundle, packages in partitioning.items():
         for package in packages:
             url = os.path.join(svnbase, package.path)

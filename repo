@@ -23,6 +23,11 @@ parser_updates.add_argument('-u', '--user', required=True)
 parser_updates.add_argument('bundle')
 parser_updates.set_defaults(op=packages.show_updates)
 
+parser_fetch = subparsers.add_parser('fetch')
+parser_fetch.add_argument('-u', '--user', required=True)
+parser_fetch.add_argument('bundles', nargs='+')
+parser_fetch.set_defaults(op=packages.fetch)
+
 args = parser.parse_args()
 cmd_args = dict(args._get_kwargs())
 del cmd_args['op']
