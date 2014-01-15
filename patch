@@ -4,6 +4,8 @@ if [ -d src/common/PATCore ]
 then
     echo "patching PATCore ..."
     cp patches/PATCore/config.h src/common/PATCore/PATCore/.
+    mkdir src/common/PATCore/PATCore/RootCore
+    touch src/common/PATCore/PATCore/RootCore/Packages.h
 fi
 
 if [ -d src/common/TauTriggerEmulation ]
