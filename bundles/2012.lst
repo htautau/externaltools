@@ -7,9 +7,7 @@ TrigTauEfficiency-00-00-03
 # latest 2012 tag
 TauTriggerCorrections-00-01-03
 TauFakeRates-12-00-07 atlasusr/morgens
-#TauFakeRates2012
 JVFUncertaintyTool-00-00-03
 MuonIsolationCorrection-01-01
-TileTripReader-00-00-07
 HSG4LepLepTriggerSF-00-06-01
-EmbeddedCorrections-00-00-04
+EmbeddedCorrections-00-00-06

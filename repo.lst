@@ -49,7 +49,6 @@ atlasoff/Reconstruction/egamma/egammaAnalysis/egammaAnalysisUtils
 atlasoff/Reconstruction/egamma/egammaEvent
 
 atlasphys/Physics/Higgs/HSG4/software/hadhad/TauFakeRates
-#atlasphys/Physics/Higgs/HSG4/software/hadhad/TauFakeRates2012
 
 # https://twiki.cern.ch/twiki/bin/viewauth/Atlas/TileTripReader
 atlasoff/PhysicsAnalysis/TileID/TileTripReader
