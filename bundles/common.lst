@@ -10,8 +10,8 @@ ApplyJetCalibration-00-03-03
 ApplyJetResolutionSmearing-00-01-01
 ElectronEfficiencyCorrection-00-00-40
 MuonMomentumCorrections-00-09-08-01
-MuonEfficiencyCorrections-02-01-19
-TrigMuonEfficiency-00-02-47
+MuonEfficiencyCorrections-02-01-11
+TrigMuonEfficiency-00-02-37
 egammaEvent-04-00-03
 egammaAnalysisUtils-00-04-58
 TauDiscriminant
