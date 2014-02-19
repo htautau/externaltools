@@ -3,11 +3,4 @@
 # blank lines and lines beginning with # are ignored
 include common.lst
 # new trigger efficiency tool
-TrigTauEfficiency-00-00-03
-# latest 2012 tag
-TauTriggerCorrections-00-01-03
 TauFakeRates-12-00-07 atlasusr/morgens
-JVFUncertaintyTool-00-00-03
-MuonIsolationCorrection-01-01
-HSG4LepLepTriggerSF-00-06-01
-EmbeddedCorrections-00-00-06

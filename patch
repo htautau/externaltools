@@ -14,53 +14,23 @@ then
     share=src/common/TauTriggerEmulation/share
     cp patches/TauTriggerEmulation/config_EF_DiTau.xml $share
     cp patches/TauTriggerEmulation/config_EF_DiTau_with_resurrected.xml $share
-
     cp patches/TauTriggerEmulation/EF_tau29_medium1_tau20_medium1_Hypo_00_02_35.xml $share/triggers/TrigTauHypo_00_02_35/
     cp patches/TauTriggerEmulation/EF_tau29_medium1_tau20_medium1_Hypo_00_02_42.xml $share/triggers/TrigTauHypo_00_02_42/
     cp patches/TauTriggerEmulation/EF_tau29_medium1_tau20_medium1_Hypo_00_03_02.xml $share/triggers/TrigTauHypo_00_03_02/
     cp patches/TauTriggerEmulation/EF_tau29T_medium1_tau20T_medium1_Hypo_00_03_02.xml $share/triggers/TrigTauHypo_00_03_02/
 fi
 
-if [ -d src/bundle_2011/TauTriggerCorrections ]
+if [ -d src/common/TauTriggerCorrections ]
 then
     echo "patching TauTriggerCorrections ..."
-    if [ -d src/bundle_2011/TauTriggerCorrections/root ]
+    if [ -d src/common/TauTriggerCorrections/root ]
     then
-        mv src/bundle_2011/TauTriggerCorrections/root src/bundle_2011/TauTriggerCorrections/share
+        mv src/common/TauTriggerCorrections/root src/common/TauTriggerCorrections/share
     fi
 fi
 
-#if [ -d src/common/TrigMuonEfficiency ]
-#then
-#    echo "patching TrigMuonEfficiency ..."
-#	cp patches/TrigMuonEfficiency/* src/TrigMuonEfficiency/share/.
-#fi
-
-if [ -d src/bundle_2012/JVFUncertaintyTool ]
+if [ -d src/common/JVFUncertaintyTool ]
 then
     echo "patching JVFUncertaintyTool ..."
-	cp patches/JVFUncertaintyTool/* src/bundle_2012/JVFUncertaintyTool/Root/.
+	cp patches/JVFUncertaintyTool/* src/common/JVFUncertaintyTool/Root/.
 fi
-
-#if [ -d src/common/MuonEfficiencyCorrections ]
-#then
-#    echo "patching MuonEfficiencyCorrections ..."
-#    cp patches/MuonEfficiencyCorrections/LinkDef.h src/common/MuonEfficiencyCorrections/Root/.
-#fi
-
-if [ -d src/bundle_2012/EmbeddedCorrections ]
-then
-    echo "patching TrigMuonEfficiency from EmbeddedCorrections ..."
-    cp src/bundle_2012/EmbeddedCorrections/ToBeModified/muon_trigger_sf_2012_AtoL.p1328.root src/common/TrigMuonEfficiency/share/.
-    cp src/bundle_2012/EmbeddedCorrections/ToBeModified/LeptonTriggerSF.cxx src/common/TrigMuonEfficiency/Root/.
-    cp src/bundle_2012/EmbeddedCorrections/ToBeModified/LeptonTriggerSF.h src/common/TrigMuonEfficiency/TrigMuonEfficiency/.
-fi
-
-if [ -d src/TauCorrUncert ]
-then
-    echo "patching TauCorrUncert to enable TES splitting ..."
-    echo "WARNING: This patch makes the default non-TES-split ROOT input files unusable!"
-    cp patches/TauCorrUncert/TESUncertainty.cxx src/bundle_2012/TauCorrUncert/Root/.
-    cp patches/TauCorrUncert/mc12_p1344_medium_split.root src/bundle_2012/TauCorrUncert/share/TES/.
-fi
-
