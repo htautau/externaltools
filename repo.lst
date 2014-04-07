@@ -75,3 +75,6 @@ atlasusr/dellasta/HSG4LepLepTriggerSF
 
 # https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/TElectronEfficiencyCorrectionTool
 atlasoff/PhysicsAnalysis/ElectronPhotonID/ElectronEfficiencyCorrection
+
+# https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/BCHCleaningTool
+atlasoff/Reconstruction/Jet/JetAnalysisTools/BCHCleaningTool
