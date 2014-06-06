@@ -53,3 +53,13 @@ externaltools to the PYTHONPATH.
 In a Python script::
 
    from externaltools import MissingETUtility
+
+
+Notes
+=====
+
+The EmbeddedCorrections package requires downloading the following file
+separately since it is too large for svn and placing it in the
+share directory::
+
+   /afs/cern.ch/user/l/lhelary/public/TriggerEventNumberDimuons7TeV.root
