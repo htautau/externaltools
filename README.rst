@@ -29,17 +29,6 @@ Then build everything::
    make
 
 
-Testing the Built Packages
-==========================
-
-To make sure that all packages are built properly and that there are no linking
-errors::
-
-   ./test
-
-You should see no errors. *TODO: update the test script.*
-
-
 Using the Packages
 ==================
 
