@@ -43,6 +43,7 @@ atlasoff/PhysicsAnalysis/AnalysisCommon/MissingMassCalculator
 
 atlasoff/PhysicsAnalysis/HiggsPhys/ggFReweighting
 
+# https://twiki.cern.ch/twiki/bin/view/Atlas/TrigMuonEfficiency
 atlasoff/Trigger/TrigAnalysis/TrigMuonEfficiency
 
 atlasoff/Reconstruction/egamma/egammaAnalysis/egammaAnalysisUtils
