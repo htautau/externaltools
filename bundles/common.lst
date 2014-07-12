@@ -2,7 +2,7 @@ ApplyJetCalibration-00-03-03
 ApplyJetResolutionSmearing-00-01-01
 egammaAnalysisUtils-00-04-58
 egammaEvent-04-00-03
-ElectronEfficiencyCorrection-00-00-40
+ElectronEfficiencyCorrection-00-00-50
 ggFReweighting-00-00-13
 GoodRunsLists-00-01-09
 HSG4TriggerSF-00-00-08
@@ -18,7 +18,7 @@ TauCorrUncert-00-00-13-01
 TauDiscriminant
 TauTriggerEmulation
 TileTripReader-00-00-19
-TrigMuonEfficiency-00-02-38
+TrigMuonEfficiency-00-02-48
 TrigRootAnalysis-00-01-05
 VBFFilterOLR-00-00-04
 JVFUncertaintyTool-00-00-03
